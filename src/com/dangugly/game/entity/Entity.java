@@ -2,21 +2,18 @@ package com.dangugly.game.entity;
 
 import com.dangugly.game.graphics.Animation;
 import com.dangugly.game.graphics.Sprite;
-import com.dangugly.game.util.AABB;
-import com.dangugly.game.util.KeyHandler;
-import com.dangugly.game.util.MouseHandler;
-import com.dangugly.game.util.Vector2f;
+import com.dangugly.game.util.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity {
 
-    private final int UP = 3;
-    private final int DOWN = 2;
-    private final int RIGHT = 0;
-    private final int LEFT = 1;
-    private final int FALLEN = 4;
+    protected final int UP = 3;
+    protected final int DOWN = 2;
+    protected final int RIGHT = 0;
+    protected final int LEFT = 1;
+    protected final int FALLEN = 4;
     protected int currentAnimation;
 
     protected Animation ani;
@@ -42,6 +39,8 @@ public abstract class Entity {
     protected AABB hitBounds;
     protected AABB bounds;
 
+    protected TileCollision tc;
+
     public Entity(Sprite sprite, Vector2f origin, int size){
         this.sprite = sprite;
         pos = origin;
@@ -52,12 +51,16 @@ public abstract class Entity {
 
         ani = new Animation();
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
+
+        tc = new TileCollision(this);
     }
 
     public void setSprite(Sprite sprite){
         this.sprite=sprite;
     }
-
+    public void setFallen(boolean b) {
+        fallen = b;
+    }
     public void setSize(int i){ size = i;}
     public void setMaxSpeed(float f){ maxSpeed = f;}
     public void setAcc(float f){ acc = f;}
@@ -78,7 +81,7 @@ public abstract class Entity {
 
     public void animate(){
         if(up){
-            if(currentAnimation != UP || ani.getDelay()==-1){
+            if(currentAnimation != UP || ani.getDelay()==-1){ //Which row of spritesheet to play animation from
                 setAnimation(UP, sprite.getSpriteArray(UP), 5);
             }
         }

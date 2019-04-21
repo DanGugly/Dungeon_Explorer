@@ -1,5 +1,6 @@
 package com.dangugly.game.entity;
 
+import com.dangugly.game.GamePanel;
 import com.dangugly.game.graphics.Sprite;
 import com.dangugly.game.states.PlayState;
 import com.dangugly.game.util.KeyHandler;
@@ -75,16 +76,33 @@ public class Player extends Entity {
         }
     }
 
+    private void resetPosition(){
+        System.out.println("Resetting player....");
+        pos.x = GamePanel.width / 2 - 64 ;
+        PlayState.map.x = 0;
+        pos.y = GamePanel.height / 2 - 64;
+        PlayState.map.y = 0;
+
+        setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
+    }
     public void update(){
         super.update();
-        move();
-        if(!bounds.collisionTile(dx,0)){
-            PlayState.map.x += dx;
-            pos.x += dx;
-        }
-        if (!bounds.collisionTile(0, dy)){
-            PlayState.map.y += dy;
-            pos.y += dy;
+        if(!fallen){
+            move();
+            if(!tc.collisionTile(dx,0)){
+                PlayState.map.x += dx;
+                pos.x += dx;
+            }
+            if (!tc.collisionTile(0, dy)){
+                PlayState.map.y += dy;
+                pos.y += dy;
+            }
+        } else {
+            if(ani.hasPlayedOnce()){
+                resetPosition();
+
+                fallen = false;
+            }
         }
     }
 
@@ -101,30 +119,37 @@ public class Player extends Entity {
             System.out.println("Player: "+pos.x+", "+pos.y);
         }
 
-        if(key.up.down){
-            up = true;
+        if (!fallen){
+            if(key.up.down){
+                up = true;
+            } else {
+                up = false;
+            }
+            if(key.down.down){
+                down = true;
+            } else {
+                down = false;
+            }
+            if(key.left.down){
+                left = true;
+            } else {
+                left = false;
+            }
+            if(key.right.down){
+                right = true;
+            } else {
+                right = false;
+            }
+            if(key.attack.down){
+                attack = true;
+            } else {
+                attack = false;
+            }
         } else {
             up = false;
-        }
-        if(key.down.down){
-            down = true;
-        } else {
             down = false;
-        }
-        if(key.left.down){
-            left = true;
-        } else {
-            left = false;
-        }
-        if(key.right.down){
-            right = true;
-        } else {
             right = false;
-        }
-        if(key.attack.down){
-            attack = true;
-        } else {
-            attack = false;
+            left = false;
         }
     }
 }
