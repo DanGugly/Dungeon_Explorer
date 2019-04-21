@@ -15,8 +15,8 @@ public class Player extends Entity {
         super(sprite, origin, size);
         acc = 2f;
         maxSpeed = 3f;
-        bounds.setWidth(42); //Decrease hitbox of player, doesnt need to be too big
-        bounds.setHeight(20);
+        bounds.setWidth(30); //Decrease hitbox of player, doesnt need to be too big
+        bounds.setHeight(15);
         bounds.setxOffset(12);
         bounds.setyOffset(40);
     }

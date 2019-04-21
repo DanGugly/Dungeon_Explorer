@@ -24,6 +24,13 @@ public class AABB {
         size = Math.max(w, h);
     }
 
+    public AABB(Vector2f pos, int r) {
+        this.pos = pos;
+        this.r = r;
+
+        size = r;
+    }
+
     public AABB(Vector2f pos, int r, Entity e){
         this.pos = pos;
         this.r = r;
@@ -83,15 +90,16 @@ public class AABB {
     }
 
     public boolean colCircleBox(AABB aBox){
-        float cx = (float) (pos.getWorldVar().x + r / Math.sqrt(2) - e.getSize() / Math.sqrt(2));
-        float cy = (float) (pos.getWorldVar().y + r / Math.sqrt(2) - e.getSize() / Math.sqrt(2));
+        float dx = Math.max(aBox.getPos().getWorldVar().x + aBox.getXOffset(), Math.min(pos.getWorldVar().x+(r/2), aBox.getPos().getWorldVar().x+aBox.getXOffset()+aBox.getWidth()));
+        float dy = Math.max(aBox.getPos().getWorldVar().y + aBox.getYOffset(), Math.min(pos.getWorldVar().y+(r/2), aBox.getPos().getWorldVar().y+aBox.getXOffset()+aBox.getHeight()));
 
-        float xDelta = cx - Math.max(aBox.pos.getWorldVar().x + (aBox.getWidth()/2),Math.min(cx, aBox.pos.getWorldVar().x));
-        float yDelta = cx - Math.max(aBox.pos.getWorldVar().y + (aBox.getWidth()/2),Math.min(cx, aBox.pos.getWorldVar().y));
+        dx = pos.getWorldVar().x + (r/2) - dx;
+        dy = pos.getWorldVar().y + (r/2) - dy;
 
-        if ((xDelta * xDelta+ yDelta*yDelta<((this.r / Math.sqrt(2))*(this.r / Math.sqrt(2))))){
+        if(Math.sqrt(dx*dx+dy*dy) < r / 2){
             return true;
         }
+
         return false;
     }
 }
