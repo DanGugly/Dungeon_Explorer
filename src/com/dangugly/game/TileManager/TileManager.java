@@ -82,6 +82,7 @@ public class TileManager {
             }
 
         } catch (Exception e) {
+            System.out.println("ERROR: Tilemanager: Can not read tilemap");
             e.printStackTrace();
         }
     }
