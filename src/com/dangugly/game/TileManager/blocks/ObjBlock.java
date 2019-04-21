@@ -15,10 +15,13 @@ public class ObjBlock extends Block {
     public boolean update(AABB p) {
         return true;
     }
+    public boolean isInside(AABB p){
+        return false;
+    }
 
     public void render(Graphics2D g){
         super.render(g);
-        g.setColor(Color.white);
+        g.setColor(Color.white); //Draw white rect around solids
         g.drawRect((int) pos.getWorldVar().x,(int) pos.getWorldVar().y, w, h);
     }
 }

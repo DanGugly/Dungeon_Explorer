@@ -22,7 +22,7 @@ public class PlayState extends GameState{
     public PlayState(GameStateManager gsm){
         super(gsm);
 
-        map = new Vector2f();
+        map = new Vector2f();   //0,0 in player new vector
         Vector2f.setWorldVar(map.x,map.y);
 
         tm = new TileManager("tile/tilemap.xml");

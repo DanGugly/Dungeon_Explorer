@@ -14,13 +14,12 @@ public class HoleBlock extends Block{
 
     public boolean update(AABB p) {
 
-        if(isInside(p)){
-            System.out.println("Inside hole");
-        }
+        System.out.println("Inside hole");
+
         return false;
     }
 
-    private boolean isInside(AABB p){
+    public boolean isInside(AABB p){   //Determine if player in hole block to fall
         if(p.getPos().x +p.getXOffset()<pos.x) return false;
         if(p.getPos().y +p.getYOffset()<pos.y) return false;
         if(w + pos.x < p.getWidth()+ (p.getPos().x + p.getXOffset())) return false;
@@ -30,7 +29,7 @@ public class HoleBlock extends Block{
     }
     public void render(Graphics2D g){
         super.render(g);
-        g.setColor(Color.green);
+        g.setColor(Color.green); //draw green rect around holes
         g.drawRect((int) pos.getWorldVar().x,(int) pos.getWorldVar().y, w, h);
     }
 }

@@ -14,7 +14,7 @@ public class Player extends Entity {
         super(sprite, origin, size);
         acc = 2f;
         maxSpeed = 3f;
-        bounds.setWidth(42);
+        bounds.setWidth(42); //Decrease hitbox of player, doesnt need to be too big
         bounds.setHeight(20);
         bounds.setxOffset(12);
         bounds.setyOffset(40);
@@ -79,7 +79,7 @@ public class Player extends Entity {
         super.update();
         move();
         if(!bounds.collisionTile(dx,0)){
-            PlayState.map.x += dy;
+            PlayState.map.x += dx;
             pos.x += dx;
         }
         if (!bounds.collisionTile(0, dy)){
@@ -90,7 +90,7 @@ public class Player extends Entity {
 
     @Override
     public void render(Graphics2D g) {
-        g.setColor(Color.blue);
+        g.setColor(Color.blue); //drawing player hitbox
         g.drawRect((int) (pos.getWorldVar().x +bounds.getXOffset()), (int) (pos.getWorldVar().y+bounds.getYOffset()),(int) bounds.getWidth(), (int) bounds.getHeight());
         g.drawImage(ani.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
     }
