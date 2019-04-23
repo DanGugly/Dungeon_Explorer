@@ -3,6 +3,7 @@ package com.dangugly.game.entity;
 import com.dangugly.game.GamePanel;
 import com.dangugly.game.graphics.Sprite;
 import com.dangugly.game.states.PlayState;
+import com.dangugly.game.util.AABB;
 import com.dangugly.game.util.KeyHandler;
 import com.dangugly.game.util.MouseHandler;
 import com.dangugly.game.util.Vector2f;
@@ -19,6 +20,7 @@ public class Player extends Entity {
         bounds.setHeight(15);
         bounds.setxOffset(12);
         bounds.setyOffset(40);
+        bounds.setE(this);
     }
 
     public void move(){
@@ -83,6 +85,8 @@ public class Player extends Entity {
         pos.y = GamePanel.height / 2 - 64;
         PlayState.map.y = 0;
 
+        dx = 0;     //Dont keep velocity on respawn
+        dy = 0;
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
     }
     public void update(){
@@ -100,7 +104,6 @@ public class Player extends Entity {
         } else {
             if(ani.hasPlayedOnce()){
                 resetPosition();
-
                 fallen = false;
             }
         }
@@ -115,9 +118,9 @@ public class Player extends Entity {
 
     public void input(MouseHandler mouse, KeyHandler key){
 
-        if (mouse.getButton() == 1){
-            System.out.println("Player: "+pos.x+", "+pos.y);
-        }
+        //if (mouse.getButton() == 1){
+        //    System.out.println("Player: "+pos.x+", "+pos.y);
+       // }
 
         if (!fallen){
             if(key.up.down){

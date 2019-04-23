@@ -5,6 +5,8 @@ import com.dangugly.game.TileManager.blocks.Block;
 import com.dangugly.game.TileManager.blocks.HoleBlock;
 import com.dangugly.game.entity.Entity;
 
+import javax.lang.model.type.NullType;
+
 public class AABB {
 
     private Vector2f pos;
@@ -15,6 +17,9 @@ public class AABB {
     private float r;
     private int size;
     private Entity e;
+
+    public void setE(Entity e) {
+        this.e = e;}
 
     public AABB(Vector2f pos, int w, int h){
         this.pos = pos;
@@ -36,7 +41,7 @@ public class AABB {
         this.r = r;
         this.e = e;
 
-        size =r ;
+        size = r;
     }
 
     public Vector2f getPos() {return pos;}
@@ -123,17 +128,22 @@ public class AABB {
         int nextXt = (int) ((( (pos.x+ax) +xOffset) / 64) +w / 64); //Add to width and height of the block
         int nextYt = (int) ((( (pos.y+ax) +yOffset) / 64) +h / 64);
 
-        if((nextXt == yt +1 )|| (nextXt == xt +1)){
-            if(TileMapObj.tmo_blocks.containsKey(String.valueOf(nextXt) +","+String.valueOf(nextYt))){
-                Block blockNeighbour = TileMapObj.tmo_blocks.get(String.valueOf(nextXt)+","+String.valueOf(nextYt));
-                return blockNeighbour.update(this);
-            }
-        }else {
-            if (block.isInside(this)){
-                return block.update(this);
-            }
+        if (block.isInside(e.getBounds())){
+            e.setFallen(true);
+            return block.update(this);
         }
+        else {
+            if((nextYt == yt +1 )|| (nextXt == xt +1)){
+                if(TileMapObj.tmo_blocks.containsKey(String.valueOf(nextXt) +","+String.valueOf(nextYt))){
+                    if (e.getBounds().getPos().x > block.getPos().x){
+                        e.setFallen(true);
+                    }
+                    return false;
+                }
+             }
 
-        return false;
+             e.setFallen(false);
+             return false;
+        }
     }
 }
