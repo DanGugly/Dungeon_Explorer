@@ -89,11 +89,11 @@ public class Player extends Entity {
         super.update();
         if(!fallen){
             move();
-            if(!tc.collisionTile(dx,0)){
+            if(!bounds.collisionTile(dx,0)){
                 PlayState.map.x += dx;
                 pos.x += dx;
             }
-            if (!tc.collisionTile(0, dy)){
+            if (!bounds.collisionTile(0, dy)){
                 PlayState.map.y += dy;
                 pos.y += dy;
             }

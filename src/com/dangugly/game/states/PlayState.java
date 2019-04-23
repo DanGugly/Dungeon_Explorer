@@ -39,7 +39,7 @@ public class PlayState extends GameState{
     public void update(){
         Vector2f.setWorldVar(map.x,map.y);
         player.update();
-        enemy.update(player.getBounds());
+        //enemy.update(player.getBounds());
     }
     public void input(MouseHandler mouse, KeyHandler key){
         player.input(mouse,key);

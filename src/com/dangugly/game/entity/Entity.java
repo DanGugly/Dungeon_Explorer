@@ -39,8 +39,6 @@ public abstract class Entity {
     protected AABB hitBounds;
     protected AABB bounds;
 
-    protected TileCollision tc;
-
     public Entity(Sprite sprite, Vector2f origin, int size){
         this.sprite = sprite;
         pos = origin;
@@ -52,7 +50,6 @@ public abstract class Entity {
         ani = new Animation();
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
 
-        tc = new TileCollision(this);
     }
 
     public void setSprite(Sprite sprite){
