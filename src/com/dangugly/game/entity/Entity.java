@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class Entity {
 
+    protected final int ATTACK = 5;
     protected final int UP = 3;
     protected final int DOWN = 2;
     protected final int RIGHT = 0;
@@ -31,8 +32,11 @@ public abstract class Entity {
     public boolean xCol = false;
     public boolean yCol = false;
 
-    protected int attackSpeed;
-    protected int attackDuration;
+    protected int attackSpeed = 500; // in milliseconds
+    protected int attackDuration = 500; // in milliseconds
+    protected double attacktime;
+    protected boolean canAttack = true;
+    protected boolean attacking = false;
 
     protected float dx;
     protected float dy;
@@ -94,55 +98,73 @@ public abstract class Entity {
         ani.setDelay(delay);
     }
 
-    public void animate(){
-        if(up){
-            if(currentAnimation != UP || ani.getDelay()==-1){ //Which row of spritesheet to play animation from
+    public void animate() {
+        if(attacking) {
+            if(currentAnimation < 5) {
+                setAnimation(currentAnimation + ATTACK, sprite.getSpriteArray(currentAnimation + ATTACK), attackDuration / 100);
+            }
+        } else if (up) {
+            if ((currentAnimation != UP || ani.getDelay() == -1)) {
                 setAnimation(UP, sprite.getSpriteArray(UP), 5);
             }
-        }
-        else if(down){
-            if(currentAnimation != DOWN || ani.getDelay()==-1){
+        } else if (down) {
+            if ((currentAnimation != DOWN || ani.getDelay() == -1)) {
                 setAnimation(DOWN, sprite.getSpriteArray(DOWN), 5);
             }
-        }
-        else if(left){
-            if(currentAnimation != LEFT || ani.getDelay()==-1){
+        } else if (left) {
+            if ((currentAnimation != LEFT || ani.getDelay() == -1)) {
                 setAnimation(LEFT, sprite.getSpriteArray(LEFT), 5);
             }
-        }
-        else if(right){
-            if(currentAnimation != RIGHT || ani.getDelay()==-1){
+        } else if (right) {
+            if ((currentAnimation != RIGHT || ani.getDelay() == -1)) {
                 setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 5);
             }
-        }else if(fallen){
-            if(currentAnimation != FALLEN || ani.getDelay()==-1){
+        } else if (fallen) {
+            if (currentAnimation != FALLEN || ani.getDelay() == -1) {
                 setAnimation(FALLEN, sprite.getSpriteArray(FALLEN), 15);
             }
         }
         else {
-            setAnimation(currentAnimation, sprite.getSpriteArray(currentAnimation), -1);
+            if(!attacking && currentAnimation > 4) {
+                setAnimation(currentAnimation - ATTACK, sprite.getSpriteArray(currentAnimation - ATTACK), -1);
+            } else if(!attacking) {
+                setAnimation(currentAnimation, sprite.getSpriteArray(currentAnimation), -1);
+            }
         }
     }
 
-    private void setHitBoxDirection(){
-        if(up){
-            hitBounds.setyOffset(-size/2);
-            hitBounds.setxOffset(0);
-        }
-        else if(down){
-            hitBounds.setyOffset(size/2);
-            hitBounds.setxOffset(0);
-        }
-        else if(left){
-            hitBounds.setxOffset(-size/2);
-            hitBounds.setyOffset(0);
-        }
-        else if(right){
-            hitBounds.setxOffset(size/2);
-            hitBounds.setyOffset(0);
+    private void setHitBoxDirection() {
+        if (up && !attacking) {
+            hitBounds.setxOffset((size - hitBounds.getWidth()) / 2);
+            hitBounds.setyOffset(-hitBounds.getHeight() / 2 + hitBounds.getXOffset());
+        } else if (down && !attacking) {
+            hitBounds.setxOffset((size - hitBounds.getWidth()) / 2);
+            hitBounds.setyOffset(hitBounds.getHeight() / 2 + hitBounds.getXOffset());
+        } else if (left && !attacking) {
+            hitBounds.setyOffset((size - hitBounds.getHeight()) / 2);
+            hitBounds.setxOffset(-hitBounds.getWidth() / 2 + hitBounds.getYOffset());
+        } else if (right && !attacking) {
+            hitBounds.setyOffset((size - hitBounds.getHeight()) / 2);
+            hitBounds.setxOffset(hitBounds.getWidth() / 2 + hitBounds.getYOffset());
         }
     }
-    public void update(){
+
+    protected boolean isAttacking(double time) {
+
+        if((attacktime / 1000000) > ((time / 1000000) - attackSpeed)) {
+            canAttack = false;
+        } else {
+            canAttack = true;
+        }
+
+        if((attacktime / 1000000) + attackDuration > (time / 1000000)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void update() {
         animate();
         setHitBoxDirection();
         ani.update();

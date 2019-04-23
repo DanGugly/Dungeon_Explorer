@@ -89,9 +89,10 @@ public class Player extends Entity {
         dy = 0;
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
     }
-    public void update(Enemy enemy){
+    public void update(Enemy enemy, double time){
         super.update();
 
+        attacking = isAttacking(time);
         if(attack && hitBounds.collides(enemy.getBounds())){
             System.out.println("Ive been hit !");
         }
@@ -162,10 +163,13 @@ public class Player extends Entity {
             } else {
                 right = false;
             }
-            if(key.attack.down){
+            if(key.attack.down && canAttack) {
                 attack = true;
+                attacktime = System.nanoTime();
             } else {
-                attack = false;
+                if(!attacking) {
+                    attack = false;
+                }
             }
             if(up && down){
                 up = down = false;

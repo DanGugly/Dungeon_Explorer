@@ -69,10 +69,10 @@ public class GameStateManager {
         add(state);
     }
 
-    public void update(){
+    public void update(double time){
         for(int i = 0; i < states.length; i++){
             if(states[i]!=null){
-                states[i].update();
+                states[i].update(time);
             }
         }
     }

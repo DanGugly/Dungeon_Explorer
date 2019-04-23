@@ -11,7 +11,7 @@ public class GameOverState extends GameState {
     }
 
     @Override
-    public void update() {
+    public void update(double time) {
 
     }
 

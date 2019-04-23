@@ -80,7 +80,7 @@ public class GamePanel extends JPanel implements Runnable{
             double now = System.nanoTime();
             int updateCount = 0;
             while (((now - lastUpdateTime) > TBU)&& (updateCount < MUBR)){
-                update();
+                update(now);
                 input(mouse, key);
                 lastUpdateTime += TBU;
                 updateCount++;
@@ -124,8 +124,8 @@ public class GamePanel extends JPanel implements Runnable{
         gsm.input(mouse,key);
     }
 
-    public void update(){
-        gsm.update();
+    public void update(double time){
+        gsm.update(time);
     }
 
     public void render(){

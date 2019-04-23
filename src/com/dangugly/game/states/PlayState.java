@@ -37,10 +37,10 @@ public class PlayState extends GameState{
         cam.target(player);
     }
 
-    public void update(){
+    public void update(double time){
+        Vector2f.setWorldVar(map.x,map.y);
         if (!(gsm.getState(GameStateManager.PAUSE))){
-            Vector2f.setWorldVar(map.x,map.y);
-            player.update(enemy);
+            player.update(enemy, time);
             enemy.update(player);
             cam.update();
         }
