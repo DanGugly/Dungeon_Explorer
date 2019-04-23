@@ -32,7 +32,7 @@ public class PlayState extends GameState{
         font = new Font("font/font.png", 10, 10);
 
         //Change size of enemy 48 / 48 w / h
-        enemy = new Enemy(new Sprite("entity/littlegirl.png", 48, 48), new Vector2f(0+(GamePanel.width /2) + 400, 0+(GamePanel.height/2)+ 400),48);
+        enemy = new Enemy(cam, new Sprite("entity/littlegirl.png", 48, 48), new Vector2f(0+(GamePanel.width /2) + 400, 0+(GamePanel.height/2)+ 400),48);
         player = new Player(new Sprite("entity/linkFormatted.png"), new Vector2f(0+(GamePanel.width /2) -64, 0+(GamePanel.height/2)-64),64);
         cam.target(player);
     }
