@@ -17,6 +17,8 @@ public class Sprite {
     private int wSprite;
     private int hSprite;
 
+    private static Font currentFont;
+
     public Sprite(String file){
         w = TILE_SIZE;
         h = TILE_SIZE;
@@ -87,6 +89,22 @@ public class Sprite {
     public BufferedImage[] getSpriteArray(int i){ return spriteArray[i];}
     public BufferedImage[][] getSpriteArray2(int i){ return spriteArray;}
 
+    public static void drawArray(Graphics2D g, String word, Vector2f pos, int size){
+        drawArray(g, currentFont, word, pos, size, size, size, 0);
+    }
+
+    public static void drawArray(Graphics2D g, String word, Vector2f pos, int size,  int xOffset){
+        drawArray(g, currentFont, word, pos, size, size, xOffset, 0);
+    }
+
+    public static void drawArray(Graphics2D g, String word, Vector2f pos, int width, int height, int xOffset){
+        drawArray(g, currentFont, word, pos, width, height, xOffset, 0);
+    }
+
+    public static void drawArray(Graphics2D g, Font f, String word, Vector2f pos, int size,  int xOffset){
+        drawArray(g, f, word, pos, size, size, xOffset, 0);
+    }
+
     public static void drawArray(Graphics2D g, ArrayList<BufferedImage> img, Vector2f pos, int width, int height, int xOffset, int yOffset){
         float x = pos.x;
         float y = pos.y;
@@ -103,6 +121,8 @@ public class Sprite {
     public static void drawArray(Graphics2D g, Font f, String word, Vector2f pos, int width, int height, int xOffset, int yOffset){
         float x = pos.x;
         float y = pos.y;
+
+        currentFont = f;
 
         for(int i = 0; i < word.length(); i++){
             if(word.charAt(i) != 32){

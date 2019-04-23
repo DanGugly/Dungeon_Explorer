@@ -38,7 +38,7 @@ public class PlayState extends GameState{
 
     public void update(){
         Vector2f.setWorldVar(map.x,map.y);
-        player.update();
+        player.update(enemy);
         enemy.update(player);
     }
     public void input(MouseHandler mouse, KeyHandler key){
@@ -46,7 +46,7 @@ public class PlayState extends GameState{
     }
     public void render(Graphics2D g){
         tm.render(g);
-        Sprite.drawArray(g, font, GamePanel.oldFrameCount+" FPS", new Vector2f(GamePanel.width - 152,10), 24, 24, 24, 0);
+        Sprite.drawArray(g, font, GamePanel.oldFrameCount+" FPS", new Vector2f(GamePanel.width - 152,10), 24, 24);
         player.render(g);
         enemy.render(g);
     }

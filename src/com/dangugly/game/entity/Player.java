@@ -89,8 +89,13 @@ public class Player extends Entity {
         dy = 0;
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
     }
-    public void update(){
+    public void update(Enemy enemy){
         super.update();
+
+        if(attack && hitBounds.collides(enemy.getBounds())){
+            System.out.println("Ive been hit !");
+        }
+
         if(!fallen){
             move();
             if(!bounds.collisionTile(dx,0)){
@@ -113,6 +118,12 @@ public class Player extends Entity {
     public void render(Graphics2D g) {
         g.setColor(Color.blue); //drawing player hitbox
         g.drawRect((int) (pos.getWorldVar().x +bounds.getXOffset()), (int) (pos.getWorldVar().y+bounds.getYOffset()),(int) bounds.getWidth(), (int) bounds.getHeight());
+
+        if(attack){
+            g.setColor(Color.red);
+            g.drawRect((int) (hitBounds.getPos().getWorldVar().x + hitBounds.getXOffset()), (int) (hitBounds.getPos().getWorldVar().y + hitBounds.getYOffset()), (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
+        }
+
         g.drawImage(ani.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
     }
 

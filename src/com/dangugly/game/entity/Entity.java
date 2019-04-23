@@ -45,7 +45,9 @@ public abstract class Entity {
         this.size = size;
 
         bounds = new AABB(origin, size, size);
-        hitBounds = new AABB(new Vector2f(origin.x+(size/2),origin.y),size,size);
+        hitBounds = new AABB(origin,size,size);
+
+        hitBounds.setxOffset( size / 2);
 
         ani = new Animation();
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
@@ -109,18 +111,18 @@ public abstract class Entity {
     private void setHitBoxDirection(){
         if(up){
             hitBounds.setyOffset(-size/2);
-            hitBounds.setxOffset(-size/2);
+            hitBounds.setxOffset(0);
         }
         else if(down){
             hitBounds.setyOffset(size/2);
-            hitBounds.setxOffset(-size/2);
+            hitBounds.setxOffset(0);
         }
         else if(left){
-            hitBounds.setyOffset(-size);
+            hitBounds.setxOffset(-size/2);
             hitBounds.setyOffset(0);
         }
         else if(right){
-            hitBounds.setxOffset(0);
+            hitBounds.setxOffset(size/2);
             hitBounds.setyOffset(0);
         }
     }
