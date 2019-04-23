@@ -1,6 +1,8 @@
 package com.dangugly.game.entity;
 
+import com.dangugly.game.GamePanel;
 import com.dangugly.game.graphics.Sprite;
+import com.dangugly.game.states.PlayState;
 import com.dangugly.game.util.AABB;
 import com.dangugly.game.util.Camera;
 import com.dangugly.game.util.Vector2f;
@@ -12,6 +14,8 @@ public class Ally extends Entity {
     private AABB sense;
     private int r;
     private Camera cam;
+
+    private Vector2f origin;
 
     public Ally(Camera cam, Sprite sprite, Vector2f origin, int size){
         super(sprite, origin, size);
@@ -25,6 +29,8 @@ public class Ally extends Entity {
         bounds.setHeight(20);
         bounds.setxOffset(12);
         bounds.setyOffset(40);
+
+        this.origin = origin;
 
         sense = new AABB(new Vector2f(origin.x + size / 2 - r / 2, origin.y + size / 2 - r / 2), r);
         bounds.setE(this);
@@ -78,14 +84,20 @@ public class Ally extends Entity {
         }
     }
 
-    private void destroy(){
+    private void reset(){
+        System.out.println("Resetting ally....");
+        pos.x = GamePanel.width / 2 - 100 ;
+        pos.y = GamePanel.height / 2 -100 ;
+        sense = new AABB(new Vector2f(origin.x + size / 2 - r / 2, origin.y + size / 2 - r / 2), r);
 
+        setAnimation(LEFT, sprite.getSpriteArray(LEFT), 10);
     }
 
     public void update(Player player){
         //if(cam.getBoundsOnScreen().collides(this.bounds)){
         super.update();
         move(player);
+
         if(!fallen){
             if(!bounds.collisionTile(dx, 0)){
                 sense.getPos().x += dx;
@@ -96,7 +108,10 @@ public class Ally extends Entity {
                 pos.y += dy;
             }
         } else {
-            destroy();
+            if(ani.hasPlayedOnce()){
+                reset();
+                fallen = false;
+            }
         }
         //}
     }

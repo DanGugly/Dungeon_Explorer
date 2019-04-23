@@ -121,6 +121,7 @@ public class Player extends Entity {
             xCol = true;
             yCol = true;
             if(ani.hasPlayedOnce()){
+                animate();
                 resetPosition();
                 fallen = false;
             }
