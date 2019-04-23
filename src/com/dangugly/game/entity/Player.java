@@ -21,6 +21,10 @@ public class Player extends Entity {
         bounds.setxOffset(12);
         bounds.setyOffset(40);
         bounds.setE(this);
+
+        hitBounds.setWidth(48);
+        hitBounds.setHeight(48);
+
     }
 
     private void move(){

@@ -94,7 +94,7 @@ public abstract class Entity {
 
     public void setAnimation(int i, BufferedImage[] frames, int delay){
         currentAnimation = i;
-        ani.setFrames(frames);
+        ani.setFrames(i, frames);
         ani.setDelay(delay);
     }
 

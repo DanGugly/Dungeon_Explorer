@@ -7,13 +7,13 @@ import com.dangugly.game.util.Vector2f;
 
 import java.awt.*;
 
-public class Enemy extends Entity {
+public class Ally extends Entity {
 
     private AABB sense;
     private int r;
     private Camera cam;
 
-    public Enemy(Camera cam, Sprite sprite, Vector2f origin, int size){
+    public Ally(Camera cam, Sprite sprite, Vector2f origin, int size){
         super(sprite, origin, size);
 
         this.cam = cam;
@@ -28,13 +28,6 @@ public class Enemy extends Entity {
 
         sense = new AABB(new Vector2f(origin.x + size / 2 - r / 2, origin.y + size / 2 - r / 2), r);
         bounds.setE(this);
-
-        ani.setNumFrames(4, UP);
-        ani.setNumFrames(4, DOWN);
-        ani.setNumFrames(4, ATTACK + RIGHT);
-        ani.setNumFrames(4, ATTACK + LEFT);
-        ani.setNumFrames(4, ATTACK + UP);
-        ani.setNumFrames(4, ATTACK + DOWN);
     }
 
     public void move(Player player){
@@ -91,32 +84,32 @@ public class Enemy extends Entity {
 
     public void update(Player player){
         //if(cam.getBoundsOnScreen().collides(this.bounds)){
-            super.update();
-            move(player);
-            if(!fallen){
-                if(!bounds.collisionTile(dx, 0)){
-                    sense.getPos().x += dx;
-                    pos.x += dx;
-                }
-                if(!bounds.collisionTile(0, dy)){
-                    sense.getPos().y += dy;
-                    pos.y += dy;
-                }
-            } else {
-                destroy();
+        super.update();
+        move(player);
+        if(!fallen){
+            if(!bounds.collisionTile(dx, 0)){
+                sense.getPos().x += dx;
+                pos.x += dx;
             }
+            if(!bounds.collisionTile(0, dy)){
+                sense.getPos().y += dy;
+                pos.y += dy;
+            }
+        } else {
+            destroy();
+        }
         //}
     }
 
     @Override
     public void render(Graphics2D g) {
         //if(cam.getBoundsOnScreen().collides(this.bounds)){
-            g.setColor(Color.green);
-           // g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(),  (int) bounds.getHeight() );
-            g.setColor(Color.blue);
-            //g.drawOval((int) (sense.getPos().getWorldVar().x), (int) (sense.getPos().getWorldVar().y), r, r);
+        g.setColor(Color.green);
+        // g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(),  (int) bounds.getHeight() );
+        g.setColor(Color.blue);
+        //g.drawOval((int) (sense.getPos().getWorldVar().x), (int) (sense.getPos().getWorldVar().y), r, r);
 
-            g.drawImage(ani.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
-       // }
+        g.drawImage(ani.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
+        // }
     }
 }
