@@ -173,7 +173,7 @@ public class Camera {
         g.setColor(Color.blue);
         g.drawRect((int) collisionCam.getPos().x,(int) collisionCam.getPos().y,(int) collisionCam.getWidth(),(int) collisionCam.getHeight() );
         g.setColor(Color.magenta);
-        g.drawLine(GamePanel.width/2, 0, GamePanel.width/2, GamePanel.height);
-        g.drawLine(0, GamePanel.height/2, GamePanel.width, GamePanel.height / 2);
+       // g.drawLine(GamePanel.width/2, 0, GamePanel.width/2, GamePanel.height);
+        //g.drawLine(0, GamePanel.height/2, GamePanel.width, GamePanel.height / 2);
     }
 }

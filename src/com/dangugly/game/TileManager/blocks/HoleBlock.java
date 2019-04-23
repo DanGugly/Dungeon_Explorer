@@ -30,6 +30,6 @@ public class HoleBlock extends Block{
     public void render(Graphics2D g){
         super.render(g);
         g.setColor(Color.green); //draw green rect around holes
-        g.drawRect((int) pos.getWorldVar().x,(int) pos.getWorldVar().y, w, h);
+       // g.drawRect((int) pos.getWorldVar().x,(int) pos.getWorldVar().y, w, h);
     }
 }

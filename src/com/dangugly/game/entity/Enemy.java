@@ -105,9 +105,9 @@ public class Enemy extends Entity {
     public void render(Graphics2D g) {
         //if(cam.getBoundsOnScreen().collides(this.bounds)){
             g.setColor(Color.green);
-            g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(),  (int) bounds.getHeight() );
+           // g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(),  (int) bounds.getHeight() );
             g.setColor(Color.blue);
-            g.drawOval((int) (sense.getPos().getWorldVar().x), (int) (sense.getPos().getWorldVar().y), r, r);
+            //g.drawOval((int) (sense.getPos().getWorldVar().x), (int) (sense.getPos().getWorldVar().y), r, r);
 
             g.drawImage(ani.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
        // }

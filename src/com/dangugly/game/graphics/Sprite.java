@@ -17,7 +17,7 @@ public class Sprite {
     private int wSprite;
     private int hSprite;
 
-    private static Font currentFont;
+    public static Font currentFont;
 
     public Sprite(String file){
         w = TILE_SIZE;

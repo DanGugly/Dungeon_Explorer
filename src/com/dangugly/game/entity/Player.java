@@ -124,8 +124,8 @@ public class Player extends Entity {
 
     @Override
     public void render(Graphics2D g) {
-        g.setColor(Color.blue); //drawing player hitbox
-        g.drawRect((int) (pos.getWorldVar().x +bounds.getXOffset()), (int) (pos.getWorldVar().y+bounds.getYOffset()),(int) bounds.getWidth(), (int) bounds.getHeight());
+        //g.setColor(Color.blue); //drawing player hitbox
+        //g.drawRect((int) (pos.getWorldVar().x +bounds.getXOffset()), (int) (pos.getWorldVar().y+bounds.getYOffset()),(int) bounds.getWidth(), (int) bounds.getHeight());
 
         if(attack){
             g.setColor(Color.red);
@@ -166,6 +166,12 @@ public class Player extends Entity {
                 attack = true;
             } else {
                 attack = false;
+            }
+            if(up && down){
+                up = down = false;
+            }
+            if(right && left){
+                left = right = false;
             }
         } else {
             up = false;

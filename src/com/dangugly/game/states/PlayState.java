@@ -38,20 +38,37 @@ public class PlayState extends GameState{
     }
 
     public void update(){
-        Vector2f.setWorldVar(map.x,map.y);
-        player.update(enemy);
-        enemy.update(player);
-        cam.update();
+        if (!(gsm.getState(GameStateManager.PAUSE))){
+            Vector2f.setWorldVar(map.x,map.y);
+            player.update(enemy);
+            enemy.update(player);
+            cam.update();
+        }
     }
     public void input(MouseHandler mouse, KeyHandler key){
-        player.input(mouse,key);
-        cam.input(mouse,key);
+        key.escape.tick();
+
+        if (!(gsm.getState(GameStateManager.PAUSE))){
+            player.input(mouse,key);
+            cam.input(mouse,key);
+        }
+
+        if(key.escape.clicked){
+            if(gsm.getState(GameStateManager.PAUSE)){
+                gsm.pop(GameStateManager.PAUSE);
+            }else {
+                gsm.add(GameStateManager.PAUSE);
+            }
+        }
     }
     public void render(Graphics2D g){
         tm.render(g);
+        if(gsm.getState(GameStateManager.PAUSE)){
+            Sprite.drawArray(g, font, "PAUSED", new Vector2f(GamePanel.width /2 - 64,56 ), 38, 24);
+        }
         Sprite.drawArray(g, font, GamePanel.oldFrameCount+" FPS", new Vector2f(GamePanel.width - 152,10), 24, 24);
-        player.render(g);
         enemy.render(g);
+        player.render(g);
         cam.render(g);
     }
 }
