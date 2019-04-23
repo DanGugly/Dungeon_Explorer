@@ -99,14 +99,22 @@ public class Player extends Entity {
         if(!fallen){
             move();
             if(!bounds.collisionTile(dx,0)){
-                PlayState.map.x += dx;
+               // PlayState.map.x += dx;        Our camera now controls display movement
                 pos.x += dx;
+                xCol = false;
+            }else {
+                xCol = true;
             }
             if (!bounds.collisionTile(0, dy)){
-                PlayState.map.y += dy;
+               // PlayState.map.y += dy;
                 pos.y += dy;
+                yCol = false;
+            }else {
+                yCol = true;
             }
         } else {
+            xCol = true;
+            yCol = true;
             if(ani.hasPlayedOnce()){
                 resetPosition();
                 fallen = false;

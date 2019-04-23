@@ -7,6 +7,7 @@ public class Window extends JFrame {
         setTitle("Dungeon Explorer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(new GamePanel(1280,720));
+        setIgnoreRepaint(true);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);

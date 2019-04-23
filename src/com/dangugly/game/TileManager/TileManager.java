@@ -1,6 +1,7 @@
 package com.dangugly.game.TileManager;
 
 import com.dangugly.game.graphics.Sprite;
+import com.dangugly.game.util.Camera;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -19,17 +20,19 @@ import java.util.ArrayList;
 public class TileManager {
 
     public static ArrayList<TileMap> tm;
+    public Camera cam;
 
     public TileManager(){
         tm = new ArrayList<TileMap>();
     }
 
-    public TileManager(String path){
+    public TileManager(String path, Camera cam){
         tm = new ArrayList<TileMap>();
-        addTileMap(path, 64, 64);
+        addTileMap(path, 64, 64, cam);
     }
 
-    private void addTileMap(String path, int blockWidth, int blockHeight){
+    private void addTileMap(String path, int blockWidth, int blockHeight, Camera cam){
+        this.cam = cam;
         String imagePath;
 
         int width = 0;
@@ -81,6 +84,8 @@ public class TileManager {
                 }
             }
 
+            cam.setLimit(width * blockWidth, height * blockHeight);
+
         } catch (Exception e) {
             System.out.println("ERROR: Tilemanager: Can not read tilemap");
             e.printStackTrace();
@@ -89,7 +94,8 @@ public class TileManager {
 
     public void render(Graphics2D g){
         for (int i =0; i<tm.size(); i++){
-            tm.get(i).render(g);
+            if(cam == null) return;
+            tm.get(i).render(g, cam.getBounds());
         }
     }
 }

@@ -62,6 +62,9 @@ public class GameStateManager {
         for (int i = 0; i < states.size(); i++){
             states.get(i).input(mouse, key);
         }
+        if(key.escape.down){
+            System.exit(0);
+        }
     }
 
     public void render(Graphics2D g){

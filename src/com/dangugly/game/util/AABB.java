@@ -83,8 +83,8 @@ public class AABB {
     public boolean collides(AABB bBox){
         float ax = ((pos.getWorldVar().x+(xOffset))+(this.w/2));
         float ay = ((pos.getWorldVar().y+(yOffset))+(this.h/2));
-        float bx = ((bBox.pos.getWorldVar().x +(bBox.getWidth() / 2))+(w/2));
-        float by = ((bBox.pos.getWorldVar().y +(bBox.getHeight() / 2))+(h/2));
+        float bx = ((bBox.getPos().getWorldVar().x +(bBox.getWidth() / 2))+(w/2));
+        float by = ((bBox.getPos().getWorldVar().y +(bBox.getHeight() / 2))+(h/2));
 
         if(Math.abs(ax - bx)<(this.w/2)+(bBox.getWidth() / 2)){
             if (Math.abs(ay - by) < (this.h / 2) + (bBox.getHeight() /2)){
@@ -115,8 +115,8 @@ public class AABB {
             int xt = (int) ( (pos.x +ax) + (c%2) *w+xOffset)/64;
             int yt = (int) ( (pos.y +ay) + ((int) (c/2)) *h+yOffset)/64;
 
-            if(TileMapObj.tmo_blocks.containsKey(String.valueOf(xt) +","+String.valueOf(yt))){
-                Block block = TileMapObj.tmo_blocks.get(String.valueOf(xt)+","+String.valueOf(yt)); //Fix player not falling from standing between holes
+            if(TileMapObj.event_blocks[xt + (yt * TileMapObj.height)] instanceof Block){
+                Block block = TileMapObj.event_blocks[xt + (yt * TileMapObj.height)]; //Fix player not falling from standing between holes
                 if(block instanceof HoleBlock){
                     return collisionHole(ax, ay, xt, yt, block);
                 }
@@ -136,7 +136,7 @@ public class AABB {
         }
         else {
             if((nextYt == yt +1 )|| (nextXt == xt +1 || nextYt == yt -1 )|| (nextXt == xt -1)){
-                if(TileMapObj.tmo_blocks.containsKey(String.valueOf(nextXt) +","+String.valueOf(nextYt))){
+                if(TileMapObj.event_blocks[nextXt + (nextYt * TileMapObj.height)] instanceof HoleBlock){
                     if (e.getBounds().getPos().x > block.getPos().x){ //player inbetween 2 hole blocks
                         e.setFallen(true);
                     }

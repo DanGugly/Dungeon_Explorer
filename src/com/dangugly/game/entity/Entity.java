@@ -27,6 +27,10 @@ public abstract class Entity {
     protected boolean left;
     protected boolean attack;
     protected boolean fallen;
+
+    public boolean xCol = false;
+    public boolean yCol = false;
+
     protected int attackSpeed;
     protected int attackDuration;
 
@@ -67,6 +71,18 @@ public abstract class Entity {
 
     public AABB getBounds() {
         return bounds;
+    }
+    public float getDeacc(){
+        return deacc;
+    }
+    public float getMaxSpeed(){
+        return maxSpeed;
+    }
+    public float getDx(){
+        return dx;
+    }
+    public float getDy(){
+        return dy;
     }
 
     public int getSize(){ return size;}
