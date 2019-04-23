@@ -16,103 +16,83 @@ public class Enemy extends Entity {
 
         acc = 1f;
         maxSpeed = 2f;
-        r = 135;
+        r = 300;
 
         bounds.setWidth(42); //Decrease hitbox
         bounds.setHeight(20);
         bounds.setxOffset(12);
         bounds.setyOffset(40);
 
-        sense = new AABB(new Vector2f(origin.x - size / 2, origin.y - size / 2), r);
+        sense = new AABB(new Vector2f(origin.x + size / 2 - r / 2, origin.y + size / 2 - r / 2), r);
+        bounds.setE(this);
     }
 
     public void move(Player player){
         if (sense.colCircleBox(player.getBounds())){
             if(pos.y > player.pos.y +1){
-                dy -= acc;
-
                 up = true;
+                down = false;
+                dy -= acc;
                 if(dy < -maxSpeed){
                     dy = -maxSpeed;
                 }
-            } else {
-                down = false;
-                if(dy < 0){
-                    dy += deacc;
-                    if(dy > 0){
-                        dy = 0;
-                    }
-                }
             }
-            if(pos.y < player.pos.y -1){
+            else if(pos.y < player.pos.y -1){
                 dy += acc;
                 down = true;
-
+                up = false;
                 if(dy > maxSpeed){
                     dy = maxSpeed;
                 }
             } else {
                 up = false;
-                if(dy > 0){
-                    dy -= deacc;
-                    if(dy < 0){
-                        dy = 0;
-                    }
-                }
+                down = false;
+                dy = 0;
             }
             if(pos.x > player.pos.x +1){
                 dx -= acc;
                 left = true;
-
+                right = false;
                 if(dx < -maxSpeed){
                     dx = -maxSpeed;
                 }
-            } else {
-                right = false;
-                if(dx < 0){
-                    dx += deacc;
-                    left = false;
-                    right = true;
-                    if(dx > 0){
-                        dx = 0;
-                    }
-                }
-            }
-            if(pos.x < player.pos.x -1){
+            } else if(pos.x < player.pos.x -1){
                 dx += acc;
                 right = true;
+                left = false;
                 if(dx > maxSpeed){
                     dx = maxSpeed;
                 }
             } else {
-                left = false;
-                if(dx > 0){
-                    dx -= deacc;
-                    if(dx < 0){
-                        dx = 0;
-                    }
-                }
+                left =  false;
+                right = false;
+                dx = 0;
             }
         } else {
-            up =false;
-            down = false;
-            left = false;
-            right = false;
-            dx = 0;
-            dy = 0;
+            up = down = left = right = false;
+            dx =0;
+            dy =0;
         }
+    }
+
+    private void destroy(){
+
     }
 
     public void update(Player player){
         super.update();
         move(player);
-        if(!bounds.collisionTile(dx, 0)){
-            sense.getPos().x += dx;
-            pos.x += dx;
-        }
-        if(!bounds.collisionTile(0, dy)){
-            sense.getPos().x += dy;
-            pos.x += dy;
+        if(!fallen){
+            if(!bounds.collisionTile(dx, 0)){
+                sense.getPos().x += dx;
+                pos.x += dx;
+            }
+            if(!bounds.collisionTile(0, dy)){
+                sense.getPos().y += dy;
+                pos.y += dy;
+            }
+        } else {
+            destroy();
         }
     }
 

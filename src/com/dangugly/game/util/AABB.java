@@ -94,19 +94,21 @@ public class AABB {
         return false;
     }
 
-    public boolean colCircleBox(AABB aBox){
-        float dx = Math.max(aBox.getPos().getWorldVar().x + aBox.getXOffset(), Math.min(pos.getWorldVar().x+(r/2), aBox.getPos().getWorldVar().x+aBox.getXOffset()+aBox.getWidth()));
-        float dy = Math.max(aBox.getPos().getWorldVar().y + aBox.getYOffset(), Math.min(pos.getWorldVar().y+(r/2), aBox.getPos().getWorldVar().y+aBox.getXOffset()+aBox.getHeight()));
+    public boolean colCircleBox(AABB aBox) {
 
-        dx = pos.getWorldVar().x + (r/2) - dx;
-        dy = pos.getWorldVar().y + (r/2) - dy;
+        float dx = Math.max(aBox.getPos().getWorldVar().x + aBox.getXOffset(), Math.min(pos.getWorldVar().x + (r / 2), aBox.getPos().getWorldVar().x + aBox.getXOffset() + aBox.getWidth()));
+        float dy = Math.max(aBox.getPos().getWorldVar().y + aBox.getYOffset(), Math.min(pos.getWorldVar().y + (r / 2), aBox.getPos().getWorldVar().y + aBox.getYOffset() + aBox.getHeight()));
 
-        if(Math.sqrt(dx*dx+dy*dy) < r / 2){
+        dx = pos.getWorldVar().x + (r / 2) - dx;
+        dy = pos.getWorldVar().y + (r / 2) - dy;
+
+        if(Math.sqrt(dx * dx + dy * dy) < r / 2) {
             return true;
         }
 
         return false;
     }
+
     public boolean collisionTile(float ax, float ay){
         for(int c = 0; c <4; c++){ //Loop through each corner of the file
 
@@ -128,14 +130,14 @@ public class AABB {
         int nextXt = (int) ((( (pos.x+ax) +xOffset) / 64) +w / 64); //Add to width and height of the block
         int nextYt = (int) ((( (pos.y+ax) +yOffset) / 64) +h / 64);
 
-        if (block.isInside(e.getBounds())){
+        if (block.isInside(e.getBounds())){ //Player in hole block
             e.setFallen(true);
             return block.update(this);
         }
         else {
-            if((nextYt == yt +1 )|| (nextXt == xt +1)){
+            if((nextYt == yt +1 )|| (nextXt == xt +1 || nextYt == yt -1 )|| (nextXt == xt -1)){
                 if(TileMapObj.tmo_blocks.containsKey(String.valueOf(nextXt) +","+String.valueOf(nextYt))){
-                    if (e.getBounds().getPos().x > block.getPos().x){
+                    if (e.getBounds().getPos().x > block.getPos().x){ //player inbetween 2 hole blocks
                         e.setFallen(true);
                     }
                     return false;

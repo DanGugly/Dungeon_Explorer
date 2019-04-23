@@ -28,7 +28,6 @@ public class Sprite {
         hSprite = SPRITESHEET.getHeight() / h;
         loadSpriteArray();
     }
-
     public Sprite(String file, int w, int h){
         this.w = w;
         this.h = h;

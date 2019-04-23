@@ -23,7 +23,7 @@ public class Player extends Entity {
         bounds.setE(this);
     }
 
-    public void move(){
+    private void move(){
         if(up){
             dy -= acc;
             if(dy < -maxSpeed){
