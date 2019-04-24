@@ -1,5 +1,6 @@
 package com.dangugly.game.states;
 
+import com.dangugly.game.Audio.Sound;
 import com.dangugly.game.GamePanel;
 import com.dangugly.game.graphics.Font;
 import com.dangugly.game.graphics.Sprite;
@@ -25,10 +26,14 @@ public class GameStateManager {
 
     public static Font font;
 
+    private Sound SoundManager;
+
     public GameStateManager(){
         map = new Vector2f(GamePanel.width, GamePanel.height);
         Vector2f.setWorldVar(map.x, map.y);
         states = new GameState[5];
+
+        SoundManager = new Sound();
 
         font = new Font("font/font.png", 10, 10);
         Sprite.currentFont = font;

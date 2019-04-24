@@ -19,6 +19,8 @@ public class Sound {
     public void loadClips(){
         try {
             AudioClip playSound = null;
+            playSound = Applet.newAudioClip(getClass().getResource("/Music/intromenu.wav"));
+            sounds.put("intro", playSound);
             playSound = Applet.newAudioClip(getClass().getResource("/Music/Background.wav"));
             sounds.put("background", playSound);
             playSound = Applet.newAudioClip(getClass().getResource("/SFX/attack_hit.wav"));
@@ -54,6 +56,7 @@ public class Sound {
     }
 
     public void loadMap(){
+        soundsMap.put("intro", "/Music/intromenu.wav");
         soundsMap.put("background", "/Music/Background.wav");
         soundsMap.put("playerhit","/SFX/attack_hit.wav");
         soundsMap.put("enemyhit","/SFX/attack_hit_enemy.wav");

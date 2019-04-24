@@ -1,10 +1,12 @@
 package com.dangugly.game.states;
 
+import com.dangugly.game.Audio.Sound;
 import com.dangugly.game.GamePanel;
 import com.dangugly.game.util.KeyHandler;
 import com.dangugly.game.util.MouseHandler;
 
 import javax.imageio.ImageIO;
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

@@ -27,14 +27,10 @@ public class PlayState extends GameState{
     private static final String ALLY = "entity/littlegirl.png";
     private static final String ENEMY = "entity/wizardPlayer.png";
 
-    private Sound SoundManager;
-
     public static Vector2f map;
 
     public PlayState(GameStateManager gsm)  {
         super(gsm);
-
-        SoundManager = new Sound();
 
         map = new Vector2f();   //0,0 in player new vector
         Vector2f.setWorldVar(map.x,map.y);
@@ -55,7 +51,7 @@ public class PlayState extends GameState{
                 scanner.next();
             }
         } */
-        bgMusic = SoundManager.getClip("background");
+        bgMusic = Sound.getClip("background");
         bgMusic.loop();
 
         ally = new Ally[4];

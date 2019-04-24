@@ -23,6 +23,11 @@ public class MenuState extends GameState {
             gsm.pop(GameStateManager.MENU);
         }
 
+        if (key.escape.down){
+            gsm.pop(GameStateManager.MENU);
+            System.exit(0);
+        }
+
     }
 
     @Override
