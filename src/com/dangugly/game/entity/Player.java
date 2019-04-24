@@ -1,5 +1,6 @@
 package com.dangugly.game.entity;
 
+import com.dangugly.game.Audio.Sound;
 import com.dangugly.game.GamePanel;
 import com.dangugly.game.graphics.Sprite;
 import com.dangugly.game.states.PlayState;
@@ -8,6 +9,7 @@ import com.dangugly.game.util.MouseHandler;
 import com.dangugly.game.util.Vector2f;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Player extends Entity {
 
@@ -116,6 +118,7 @@ public class Player extends Entity {
     }
 
     private void resetPosition(){
+        Sound.playClip("playerdeath");
         System.out.println("Resetting player....");
         pos.x = GamePanel.width / 2 - 64 ;
         PlayState.map.x = 0;
@@ -132,7 +135,8 @@ public class Player extends Entity {
 
         attacking = isAttacking(time);
         for (int x =0; x<13;x++){
-            if(attack && hitBounds.collides(enemy[x].getBounds())){
+            if(enemy[x].isAlive()&& attack && hitBounds.collides(enemy[x].getBounds())){
+                Sound.playClip("enemyhit");
                 enemy[x].setHits();
                 if(enemy[x].getHits() > 50) kills+=1;
                 //enemy.addForce(force * getDirection(), currentAnimation == UP || currentAnimation == DOWN);
@@ -208,6 +212,22 @@ public class Player extends Entity {
                 right = false;
             }
             if(key.attack.down && canAttack) {
+                Random rand = new Random();
+                int n = rand.nextInt(3);
+                n+=1;
+                Sound.playClip("playersword");
+                if( n == 1){
+                    Sound.playClip("playershout1");
+                }
+                else if( n == 2){
+                    Sound.playClip("playershout2");
+                }
+                else if( n == 3){
+                    Sound.playClip("playershout3");
+                }
+                else{
+                    Sound.playClip("playershout4");
+                }
                 attack = true;
                 attacktime = System.nanoTime();
             } else {

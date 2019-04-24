@@ -1,5 +1,6 @@
 package com.dangugly.game.entity;
 
+import com.dangugly.game.Audio.Sound;
 import com.dangugly.game.graphics.Sprite;
 import com.dangugly.game.util.AABB;
 import com.dangugly.game.util.Camera;
@@ -69,6 +70,7 @@ public class Enemy extends Entity {
 
     public void move(Player player){
         if (sense.colCircleBox(player.getBounds())){
+            Sound.playClip("enemyattack");
             attack = true;
             attacking = true;
             if(pos.y > player.pos.y +1){
@@ -127,6 +129,7 @@ public class Enemy extends Entity {
             super.update();
             move(player);
             if(hitBounds.collides(player.getBounds())){
+                Sound.playClip("playerhit");
                 player.setHits();
                 System.out.println("Hit taken !");
             }

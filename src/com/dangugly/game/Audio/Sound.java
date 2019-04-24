@@ -31,13 +31,13 @@ public class Sound {
             sounds.put("playersword", playSound);
             playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_attack_add.wav"));
             sounds.put("playershout1", playSound);
-            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_attack_add_2"));
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_attack_add_2.wav"));
             sounds.put("playershout2", playSound);
-            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_attack_add_3"));
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_attack_add_3.wav"));
             sounds.put("playershout3", playSound);
-            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_attack_add_4"));
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_attack_add_4.wav"));
             sounds.put("playershout4", playSound);
-            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_death"));
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_death.wav"));
             sounds.put("playerdeath", playSound);
         }catch (Exception e){ System.out.println("Failed loading sounds");}
     }

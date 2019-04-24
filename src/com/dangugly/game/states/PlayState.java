@@ -57,28 +57,6 @@ public class PlayState extends GameState{
         } */
         bgMusic = SoundManager.getClip("background");
         bgMusic.loop();
-        /*
-        AudioInputStream audioIn = null;
-        try {
-            audioIn = AudioSystem.getAudioInputStream(PlayState.class.getResource("/Music/Background.wav"));
-            Clip clip = null;
-            try {
-                clip = AudioSystem.getClip();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            }
-            try {
-                clip.open(audioIn);
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            }
-            clip.start();
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
 
         ally = new Ally[4];
         enemy = new Enemy[13];
