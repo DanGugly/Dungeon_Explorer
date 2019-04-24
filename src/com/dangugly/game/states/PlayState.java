@@ -37,7 +37,7 @@ public class PlayState extends GameState{
         //Change size of enemy 48 / 48 w / h
         ally = new Ally(cam, new Sprite("entity/littlegirl.png", 48, 48), new Vector2f(0+(GamePanel.width /2) + 400, 0+(GamePanel.height/2)+ 400),48);
 
-        enemy[1] = new Enemy(cam, new Sprite("entity/wizardPlayer.png", 64, 64), new Vector2f(0 + (GamePanel.width / 2) -100, 0 + (GamePanel.height / 2) -100), 64);
+        enemy[1] = new Enemy(cam, new Sprite("entity/wizardPlayer.png", 64, 64), new Vector2f(0 + (GamePanel.width / 2) +400, 0 + (GamePanel.height / 2) -100), 64);
 
         player = new Player(new Sprite("entity/linkFormatted.png"), new Vector2f(0+(GamePanel.width /2) -64, 0+(GamePanel.height/2)-64),64);
         //player = new Player(new Sprite("entity/wizardPlayer.png", 64 ,64), new Vector2f(0+(GamePanel.width /2) -64, 0+(GamePanel.height/2)-64),64);
@@ -76,6 +76,8 @@ public class PlayState extends GameState{
             Sprite.drawArray(g, font, "PAUSED", new Vector2f(GamePanel.width /2 - 64,56 ), 38, 24);
         }
         Sprite.drawArray(g, font, GamePanel.oldFrameCount+" FPS", new Vector2f(GamePanel.width - 152,10), 24, 24);
+        Sprite.drawArray(g, font, "Hits:"+player.getKills(), new Vector2f(10,10), 24, 24);
+        Sprite.drawArray(g, font, "Hitpoints:"+(150-player.getHits()), new Vector2f(10,35), 24, 24);
         ally.render(g);
         enemy[1].render(g);
         player.render(g);

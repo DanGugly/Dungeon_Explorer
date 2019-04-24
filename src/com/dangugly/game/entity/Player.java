@@ -12,6 +12,11 @@ import java.awt.*;
 
 public class Player extends Entity {
 
+    private int hits = 0;
+    private boolean alive = true;
+
+    private int kills = 0;
+
     public Player(Sprite sprite, Vector2f origin, int size) {
         super(sprite, origin, size);
         acc = 2f;
@@ -25,6 +30,33 @@ public class Player extends Entity {
         hitBounds.setWidth(48);
         hitBounds.setHeight(48);
 
+    }
+
+    public void setKills(){
+        kills +=1;
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public void setHits(){
+        hits+=1;
+        if (hits > 150){
+            resetPosition();
+        }
+    }
+
+    public int getHits() {
+        return hits;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean a){
+        alive = a;
     }
 
     private void move(){
@@ -89,6 +121,7 @@ public class Player extends Entity {
         pos.y = GamePanel.height / 2 - 64;
         PlayState.map.y = 0;
 
+        hits = 0;
         dx = 0;     //Dont keep velocity on respawn
         dy = 0;
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
@@ -98,6 +131,8 @@ public class Player extends Entity {
 
         attacking = isAttacking(time);
         if(attack && hitBounds.collides(enemy.getBounds())){
+            enemy.setHits();
+            if(enemy.getHits() > 50) kills+=1;
             System.out.println("Ive been hit !");
         }
 
@@ -135,7 +170,7 @@ public class Player extends Entity {
 
         if(attack){
             g.setColor(Color.red);
-            g.drawRect((int) (hitBounds.getPos().getWorldVar().x + hitBounds.getXOffset()), (int) (hitBounds.getPos().getWorldVar().y + hitBounds.getYOffset()), (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
+           // g.drawRect((int) (hitBounds.getPos().getWorldVar().x + hitBounds.getXOffset()), (int) (hitBounds.getPos().getWorldVar().y + hitBounds.getYOffset()), (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
         }
 
         g.drawImage(ani.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);

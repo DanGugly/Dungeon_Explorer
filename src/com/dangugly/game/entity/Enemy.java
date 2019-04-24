@@ -13,6 +13,9 @@ public class Enemy extends Entity {
     private int r;
     private Camera cam;
 
+    private int hits = 0;
+    private boolean alive = true;
+
     public Enemy(Camera cam, Sprite sprite, Vector2f origin, int size){
         super(sprite, origin, size);
 
@@ -37,8 +40,29 @@ public class Enemy extends Entity {
         ani.setNumFrames(4, ATTACK + DOWN);
     }
 
+    public void setHits(){
+        hits+=1;
+        if (hits > 50){
+            alive = false;
+        }
+    }
+
+    public int getHits(){
+        return this.hits;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean a){
+        alive = a;
+    }
+
     public void move(Player player){
         if (sense.colCircleBox(player.getBounds())){
+            attack = true;
+            attacking = true;
             if(pos.y > player.pos.y +1){
                 up = true;
                 down = false;
@@ -79,20 +103,25 @@ public class Enemy extends Entity {
                 dx = 0;
             }
         } else {
-            up = down = left = right = false;
+            attacking = up = down = left = right = false;
             dx =0;
             dy =0;
         }
     }
 
     private void destroy(){
-
+        alive = false;
     }
 
     public void update(Player player){
         //if(cam.getBoundsOnScreen().collides(this.bounds)){
+        if(alive){
             super.update();
             move(player);
+            if(hitBounds.collides(player.getBounds())){
+                player.setHits();
+                System.out.println("Youve been hit !");
+            }
             if(!fallen){
                 if(!bounds.collisionTile(dx, 0)){
                     sense.getPos().x += dx;
@@ -103,8 +132,12 @@ public class Enemy extends Entity {
                     pos.y += dy;
                 }
             } else {
+                fallen = true;
+                attack = false;
+                animate();
                 destroy();
             }
+        }
         //}
     }
 
@@ -116,7 +149,9 @@ public class Enemy extends Entity {
             g.setColor(Color.blue);
             //g.drawOval((int) (sense.getPos().getWorldVar().x), (int) (sense.getPos().getWorldVar().y), r, r);
 
+        if(alive){
             g.drawImage(ani.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
+        }
        // }
     }
 }
