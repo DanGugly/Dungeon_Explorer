@@ -20,6 +20,8 @@ public class Player extends Entity {
 
     private int kills = 0;
 
+    private int saved = 0;
+
     public Player(Sprite sprite, Vector2f origin, int size) {
         super(sprite, origin, size);
         acc = 2f;
@@ -33,6 +35,14 @@ public class Player extends Entity {
         hitBounds.setWidth(48);
         hitBounds.setHeight(48);
 
+    }
+
+    public void setSaved() {
+        saved+=1;
+    }
+
+    public int getSaved() {
+        return saved;
     }
 
     public void setKills(){
