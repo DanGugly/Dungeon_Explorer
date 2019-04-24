@@ -10,8 +10,10 @@ import com.dangugly.game.graphics.Font;
 import com.dangugly.game.graphics.Sprite;
 import com.dangugly.game.util.*;
 
+import javax.imageio.ImageIO;
 import java.applet.AudioClip;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class PlayState extends GameState{
 
@@ -23,6 +25,11 @@ public class PlayState extends GameState{
     private Camera cam;
 
     AudioClip bgMusic = null;
+
+    private BufferedImage hp;
+    private BufferedImage save;
+    private BufferedImage kill;
+    private BufferedImage death;
 
     private static final String ALLY = "entity/littlegirl.png";
     private static final String ENEMY = "entity/wizardPlayer.png";
@@ -36,6 +43,16 @@ public class PlayState extends GameState{
         Vector2f.setWorldVar(map.x,map.y);
 
         cam = new Camera(new AABB(new Vector2f(0, 0), GamePanel.width + 64 , GamePanel.height+64 ));
+
+        try {
+            hp = ImageIO.read(getClass().getResourceAsStream("/hud/life_icon.png"));
+            save = ImageIO.read(getClass().getResourceAsStream("/hud/ally_saved_icon.png"));
+            kill = ImageIO.read(getClass().getResourceAsStream("/hud/kills_icon.png"));
+            death = ImageIO.read(getClass().getResourceAsStream("/hud/deaths_icon.png"));
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
 
         tm = new TileManager("tile/tilemap.xml", cam);
         font = new Font("font/font.png", 10, 10);
@@ -132,9 +149,13 @@ public class PlayState extends GameState{
         Sprite.drawArray(g, font, "OBJECTIVE:", new Vector2f(GamePanel.width /2 - 260,500 ), 38, 24);
         Sprite.drawArray(g, font, "DEFEAT ENEMIES & SAVE ALLIES", new Vector2f(GamePanel.width /2 - 200,550 ), 38, 24); */
         Sprite.drawArray(g, font, GamePanel.oldFrameCount+" FPS", new Vector2f(GamePanel.width - 152,10), 24, 24);
+        g.drawImage(hp, 200, 9, 24 , 24, null);
         Sprite.drawArray(g, font, "Life:"+(250-player.getHits()), new Vector2f(10,10), 24, 24);
+        g.drawImage(kill, 200, 32, 24 , 24, null);
         Sprite.drawArray(g, font,"Kills:"+player.getKills() , new Vector2f(10,35), 24, 24);
+        g.drawImage(save, 200, 58, 24 , 24, null);
         Sprite.drawArray(g, font,"Saved:"+player.getSaved() , new Vector2f(10,60), 24, 24);
+        g.drawImage(death, 200, 85, 24 , 24, null);
         Sprite.drawArray(g, font,"Deaths:"+player.getDeaths() , new Vector2f(10,85), 24, 24);
         for(int x =0; x < 4; x++){
             ally[x].render(g);
