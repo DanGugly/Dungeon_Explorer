@@ -98,6 +98,12 @@ public class PlayState extends GameState{
     }
     public void input(MouseHandler mouse, KeyHandler key){
         key.escape.tick();
+        key.enter.tick();
+        if(key.enter.clicked&&(gsm.getState(GameStateManager.PAUSE))){
+            gsm.pop(GameStateManager.PAUSE);
+            gsm.pop(GameStateManager.PLAY);
+            gsm.add(GameStateManager.MENU);
+        }
 
         if (!(gsm.getState(GameStateManager.PAUSE))){
             player.input(mouse,key);
@@ -114,19 +120,10 @@ public class PlayState extends GameState{
             }
         }
 
-        if(key.enter.down&&(gsm.getState(GameStateManager.PAUSE))){
-            gsm.pop(GameStateManager.PAUSE);
-            gsm.pop(GameStateManager.PLAY);
-            gsm.add(GameStateManager.MENU);
-        }
+
     }
     public void render(Graphics2D g){
         tm.render(g);
-        if(gsm.getState(GameStateManager.PAUSE)){
-            Sprite.drawArray(g, font, "PAUSED", new Vector2f(GamePanel.width /2 - 64,56 ), 38, 24);
-            Sprite.drawArray(g, font, "PRESS ESCAPE TO UNPAUSE", new Vector2f(GamePanel.width /2 - 260,200 ), 38, 24);
-            Sprite.drawArray(g, font, "PRESS ENTER TO RETURN TO MENU", new Vector2f(GamePanel.width /2 - 260,350 ), 38, 24);
-        }
         /*Sprite.drawArray(g, font, "PRESS ENTER TO START", new Vector2f(GamePanel.width /2 - 260,150 ), 38, 24);
         Sprite.drawArray(g, font, "PRESS ESCAPE TO QUIT", new Vector2f(GamePanel.width /2 - 260,200 ), 38, 24);
         Sprite.drawArray(g, font, "CONTROLS:", new Vector2f(GamePanel.width /2 - 260,350 ), 38, 24);
@@ -147,5 +144,10 @@ public class PlayState extends GameState{
         }
         player.render(g);
         cam.render(g);
+        if(gsm.getState(GameStateManager.PAUSE)){
+            Sprite.drawArray(g, font, "PAUSED", new Vector2f(GamePanel.width /2 - 64,56 ), 38, 24);
+            Sprite.drawArray(g, font, "PRESS ESCAPE TO UNPAUSE", new Vector2f(GamePanel.width /2 - 260,200 ), 38, 24);
+            Sprite.drawArray(g, font, "PRESS ENTER TO RETURN TO MENU", new Vector2f(GamePanel.width /2 - 260,350 ), 38, 24);
+        }
     }
 }
