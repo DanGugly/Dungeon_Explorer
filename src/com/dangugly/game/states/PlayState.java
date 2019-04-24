@@ -111,6 +111,15 @@ public class PlayState extends GameState{
                 enemy[x].update(player);
             }
             cam.update();
+            if(player.getDeaths() < 3 && player.getSaved() > 3 ){   //Win  condition
+                bgMusic.stop();
+                gsm.pop(GameStateManager.PLAY);
+                gsm.add(GameStateManager.GAMEOVER, true);
+            } else if (player.getDeaths() >= 3){         //Lose condition
+                bgMusic.stop();
+                gsm.pop(GameStateManager.PLAY);
+                gsm.add(GameStateManager.GAMEOVER, false);
+            }
         }
     }
     public void input(MouseHandler mouse, KeyHandler key){

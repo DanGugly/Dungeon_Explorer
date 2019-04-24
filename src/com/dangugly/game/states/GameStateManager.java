@@ -62,11 +62,13 @@ public class GameStateManager {
         if(state == PAUSE){
             states[PAUSE] = new PauseState(this);
         }
-        if(state == GAMEOVER){
-            states[GAMEOVER] = new GameOverState(this);
-        }
         if(state == INTRO){
             states[INTRO] = new IntroState(this);
+        }
+    }
+    public void add(int state, boolean end){
+        if(state == GAMEOVER){
+            states[GAMEOVER] = new GameOverState(this, end);
         }
     }
 
