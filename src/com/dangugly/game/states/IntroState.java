@@ -12,17 +12,22 @@ import java.awt.image.BufferedImage;
 
 public class IntroState extends GameState {
 
+    AudioClip bgMusic = null;
+
     private BufferedImage logo;
 
     private int alpha;
     private int ticks;
 
-    private final int FADE_IN = 60;
-    private final int LENGTH = 60;
-    private final int FADE_OUT = 60;
+    private final int FADE_IN = 95;
+    private final int LENGTH = 95;
+    private final int FADE_OUT = 95;
 
     public IntroState(GameStateManager gsm) {
         super(gsm);
+
+        bgMusic = Sound.getClip("intro");
+        bgMusic.play();
         init();
     }
 
@@ -45,9 +50,12 @@ public class IntroState extends GameState {
 
     @Override
     public void input(MouseHandler mouse, KeyHandler key) {
-        if (key.enter.down){
-            ticks = FADE_IN + LENGTH + FADE_OUT +1;
-        }
+        /*key.enter.tick();         Skip intro by pressing enter, messes with menu and insta starts
+        if (key.enter.clicked){
+            bgMusic.stop();
+            gsm.add(GameStateManager.MENU);
+            gsm.pop(GameStateManager.INTRO);
+        } */
     }
 
     @Override

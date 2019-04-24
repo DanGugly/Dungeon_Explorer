@@ -113,12 +113,27 @@ public class PlayState extends GameState{
                 bgMusic.stop();
             }
         }
+
+        if(key.enter.down&&(gsm.getState(GameStateManager.PAUSE))){
+            gsm.pop(GameStateManager.PAUSE);
+            gsm.pop(GameStateManager.PLAY);
+            gsm.add(GameStateManager.MENU);
+        }
     }
     public void render(Graphics2D g){
         tm.render(g);
         if(gsm.getState(GameStateManager.PAUSE)){
             Sprite.drawArray(g, font, "PAUSED", new Vector2f(GamePanel.width /2 - 64,56 ), 38, 24);
+            Sprite.drawArray(g, font, "PRESS ESCAPE TO UNPAUSE", new Vector2f(GamePanel.width /2 - 260,200 ), 38, 24);
+            Sprite.drawArray(g, font, "PRESS ENTER TO RETURN TO MENU", new Vector2f(GamePanel.width /2 - 260,350 ), 38, 24);
         }
+        /*Sprite.drawArray(g, font, "PRESS ENTER TO START", new Vector2f(GamePanel.width /2 - 260,150 ), 38, 24);
+        Sprite.drawArray(g, font, "PRESS ESCAPE TO QUIT", new Vector2f(GamePanel.width /2 - 260,200 ), 38, 24);
+        Sprite.drawArray(g, font, "CONTROLS:", new Vector2f(GamePanel.width /2 - 260,350 ), 38, 24);
+        Sprite.drawArray(g, font, "W A S D TO MOVE AND", new Vector2f(GamePanel.width /2 - 200,400 ), 38, 24);
+        Sprite.drawArray(g, font, "SPACE TO ATTACK, ESC TO PAUSE", new Vector2f(GamePanel.width /2 - 200,450 ), 38, 24);
+        Sprite.drawArray(g, font, "OBJECTIVE:", new Vector2f(GamePanel.width /2 - 260,500 ), 38, 24);
+        Sprite.drawArray(g, font, "DEFEAT ENEMIES & SAVE ALLIES", new Vector2f(GamePanel.width /2 - 200,550 ), 38, 24); */
         Sprite.drawArray(g, font, GamePanel.oldFrameCount+" FPS", new Vector2f(GamePanel.width - 152,10), 24, 24);
         Sprite.drawArray(g, font, "Life:"+(250-player.getHits()), new Vector2f(10,10), 24, 24);
         Sprite.drawArray(g, font,"Kills:"+player.getKills() , new Vector2f(10,35), 24, 24);

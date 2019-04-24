@@ -38,6 +38,7 @@ public class Player extends Entity {
     }
 
     public void setSaved() {
+        Sound.playClip("opt");
         saved+=1;
     }
 
