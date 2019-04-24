@@ -43,7 +43,7 @@ public class Player extends Entity {
 
     public void setHits(){
         hits+=1;
-        if (hits > 150){
+        if (hits > 250){
             resetPosition();
         }
     }
