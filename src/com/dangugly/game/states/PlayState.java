@@ -115,9 +115,9 @@ public class PlayState extends GameState{
         }
 
         if(key.enter.down&&(gsm.getState(GameStateManager.PAUSE))){
+            gsm.add(GameStateManager.MENU);
             gsm.pop(GameStateManager.PAUSE);
             gsm.pop(GameStateManager.PLAY);
-            gsm.add(GameStateManager.MENU);
         }
     }
     public void render(Graphics2D g){
