@@ -1,5 +1,6 @@
 package com.dangugly.game.states;
 
+import com.dangugly.game.Audio.Sound;
 import com.dangugly.game.GamePanel;
 import com.dangugly.game.TileManager.TileManager;
 import com.dangugly.game.entity.Ally;
@@ -9,6 +10,7 @@ import com.dangugly.game.graphics.Font;
 import com.dangugly.game.graphics.Sprite;
 import com.dangugly.game.util.*;
 
+import java.applet.AudioClip;
 import java.awt.*;
 
 public class PlayState extends GameState{
@@ -20,14 +22,19 @@ public class PlayState extends GameState{
     private Ally[] ally;
     private Camera cam;
 
+    AudioClip bgMusic = null;
+
     private static final String ALLY = "entity/littlegirl.png";
     private static final String ENEMY = "entity/wizardPlayer.png";
 
+    private Sound SoundManager;
+
     public static Vector2f map;
 
-    public PlayState(GameStateManager gsm){
+    public PlayState(GameStateManager gsm)  {
         super(gsm);
 
+        SoundManager = new Sound();
 
         map = new Vector2f();   //0,0 in player new vector
         Vector2f.setWorldVar(map.x,map.y);
@@ -48,6 +55,30 @@ public class PlayState extends GameState{
                 scanner.next();
             }
         } */
+        bgMusic = SoundManager.getClip("background");
+        bgMusic.loop();
+        /*
+        AudioInputStream audioIn = null;
+        try {
+            audioIn = AudioSystem.getAudioInputStream(PlayState.class.getResource("/Music/Background.wav"));
+            Clip clip = null;
+            try {
+                clip = AudioSystem.getClip();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            }
+            try {
+                clip.open(audioIn);
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            }
+            clip.start();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
 
         ally = new Ally[4];
         enemy = new Enemy[13];
