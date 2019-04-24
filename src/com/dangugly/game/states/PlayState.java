@@ -125,7 +125,7 @@ public class PlayState extends GameState{
         }
         Sprite.drawArray(g, font, GamePanel.oldFrameCount+" FPS", new Vector2f(GamePanel.width - 152,10), 24, 24);
         Sprite.drawArray(g, font, "Life:"+(250-player.getHits()), new Vector2f(10,10), 24, 24);
-        Sprite.drawArray(g, font,"Score:"+player.getKills() , new Vector2f(10,35), 24, 24);
+        Sprite.drawArray(g, font,"Kills:"+player.getKills() , new Vector2f(10,35), 24, 24);
         Sprite.drawArray(g, font,"Saved:"+player.getSaved() , new Vector2f(10,60), 24, 24);
         Sprite.drawArray(g, font,"Deaths:"+player.getDeaths() , new Vector2f(10,85), 24, 24);
         for(int x =0; x < 4; x++){

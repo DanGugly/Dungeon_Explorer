@@ -18,6 +18,11 @@ public class MenuState extends GameState {
     @Override
     public void input(MouseHandler mouse, KeyHandler key) {
 
+        if (key.enter.down){
+            gsm.add((GameStateManager.PLAY));
+            gsm.pop(GameStateManager.MENU);
+        }
+
     }
 
     @Override

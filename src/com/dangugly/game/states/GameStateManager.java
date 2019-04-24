@@ -17,6 +17,7 @@ public class GameStateManager {
     public static final int MENU = 1;
     public static final int PAUSE = 2;
     public static final int GAMEOVER = 3;
+    public static final int INTRO = 4;
 
     public static Vector2f map;
 
@@ -27,12 +28,13 @@ public class GameStateManager {
     public GameStateManager(){
         map = new Vector2f(GamePanel.width, GamePanel.height);
         Vector2f.setWorldVar(map.x, map.y);
-        states = new GameState[4];
+        states = new GameState[5];
 
         font = new Font("font/font.png", 10, 10);
         Sprite.currentFont = font;
 
-        states[PLAY] = new PlayState(this);
+        states[INTRO] = new IntroState(this);
+        //states[PLAY] = new PlayState(this);
     }
 
     public boolean getState(int state){
@@ -57,6 +59,9 @@ public class GameStateManager {
         }
         if(state == GAMEOVER){
             states[GAMEOVER] = new GameOverState(this);
+        }
+        if(state == INTRO){
+            states[INTRO] = new IntroState(this);
         }
     }
 
