@@ -21,6 +21,24 @@ public class Sound {
             AudioClip playSound = null;
             playSound = Applet.newAudioClip(getClass().getResource("/Music/Background.wav"));
             sounds.put("background", playSound);
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/attack_hit.wav"));
+            sounds.put("playerhit", playSound);
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/attack_hit_enemy.wav"));
+            sounds.put("enemyhit", playSound);
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/enemy_attack.wav"));
+            sounds.put("enemyattack", playSound);
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_attack.wav"));
+            sounds.put("playersword", playSound);
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_attack_add.wav"));
+            sounds.put("playershout1", playSound);
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_attack_add_2"));
+            sounds.put("playershout2", playSound);
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_attack_add_3"));
+            sounds.put("playershout3", playSound);
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_attack_add_4"));
+            sounds.put("playershout4", playSound);
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_death"));
+            sounds.put("playerdeath", playSound);
         }catch (Exception e){ System.out.println("Failed loading sounds");}
     }
 
@@ -37,6 +55,15 @@ public class Sound {
 
     public void loadMap(){
         soundsMap.put("background", "/Music/Background.wav");
+        soundsMap.put("playerhit","/SFX/attack_hit.wav");
+        soundsMap.put("enemyhit","/SFX/attack_hit_enemy.wav");
+        soundsMap.put("enemyattack","/SFX/enemy_attack.wav");
+        soundsMap.put("playersword","/SFX/player_attack.wav");
+        soundsMap.put("playershout1","/SFX/player_attack_add.wav");
+        soundsMap.put("playershout2","/SFX/player_attack_add_2");
+        soundsMap.put("playershout3","/SFX/player_attack_add_3");
+        soundsMap.put("playershout4","/SFX/player_attack_add_4");
+        soundsMap.put("playerdeath","/SFX/player_death");
     }
 
     public static void playClip(String name){
