@@ -19,7 +19,7 @@ public class Player extends Entity {
     protected float force = 25f;
 
     private int kills = 0;
-
+    private int deaths =0;
     private int saved = 0;
 
     public Player(Sprite sprite, Vector2f origin, int size) {
@@ -43,6 +43,10 @@ public class Player extends Entity {
 
     public int getSaved() {
         return saved;
+    }
+
+    public int getDeaths() {
+        return deaths;
     }
 
     public void setKills(){
@@ -128,6 +132,7 @@ public class Player extends Entity {
     }
 
     private void resetPosition(){
+        deaths+=1;
         Sound.playClip("playerdeath");
         System.out.println("Resetting player....");
         pos.x = GamePanel.width / 2 - 64 ;
