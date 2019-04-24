@@ -1,5 +1,6 @@
 package com.dangugly.game.states;
 
+import com.dangugly.game.Audio.JukeBox;
 import com.dangugly.game.GamePanel;
 import com.dangugly.game.TileManager.TileManager;
 import com.dangugly.game.entity.Ally;
@@ -20,10 +21,18 @@ public class PlayState extends GameState{
     private Ally[] ally;
     private Camera cam;
 
+    private static final String ALLY = "entity/littlegirl.png";
+    private static final String ENEMY = "entity/wizardPlayer.png";
+
     public static Vector2f map;
 
     public PlayState(GameStateManager gsm){
         super(gsm);
+
+        JukeBox.load("/Music/zeldapalacetheme.mp3", "bg");
+        JukeBox.setVolume("bg", -10);
+        JukeBox.loop("bg", 1000, 1000, JukeBox.getFrames("bg") - 1000);
+
 
         map = new Vector2f();   //0,0 in player new vector
         Vector2f.setWorldVar(map.x,map.y);
@@ -33,16 +42,28 @@ public class PlayState extends GameState{
         tm = new TileManager("tile/tilemap.xml", cam);
         font = new Font("font/font.png", 10, 10);
 
+        /*
+        File file = new File("file.txt");
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            if (scanner.hasNextInt()) {
+                integers.add(scanner.nextInt());
+            }
+            else {
+                scanner.next();
+            }
+        } */
+
         ally = new Ally[4];
         enemy = new Enemy[13];
         //Change size of enemy 48 / 48 w / h
-        ally[0] = new Ally(cam, new Sprite("entity/littlegirl.png", 48, 48), new Vector2f(1632, 216),48);
+        ally[0] = new Ally(cam, new Sprite(ALLY, 48, 48), new Vector2f(1632, 216),48);
         ally[1] = new Ally(cam, new Sprite("entity/littlegirl.png", 48, 48), new Vector2f(2781, 2378),48);
         ally[2] = new Ally(cam, new Sprite("entity/littlegirl.png", 48, 48), new Vector2f(270, 2793),48);
         ally[3] = new Ally(cam, new Sprite("entity/littlegirl.png", 48, 48), new Vector2f(0 + (GamePanel.width / 2) +400, 0 + (GamePanel.height / 2) -50),48);
 
         //enemy[1] = new Enemy(cam, new Sprite("entity/wizardPlayer.png", 64, 64), new Vector2f(0 + (GamePanel.width / 2) +400, 0 + (GamePanel.height / 2) -100), 64);
-        enemy[0] = new Enemy(cam, new Sprite("entity/wizardPlayer.png", 64, 64), new Vector2f(1606, 390), 64);
+        enemy[0] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(1606, 390), 64);
         enemy[1] = new Enemy(cam, new Sprite("entity/wizardPlayer.png", 64, 64), new Vector2f(1688, 384), 64);
         enemy[2] = new Enemy(cam, new Sprite("entity/wizardPlayer.png", 64, 64), new Vector2f(1635, 1162), 64);
         enemy[3] = new Enemy(cam, new Sprite("entity/wizardPlayer.png", 64, 64), new Vector2f(1443, 1706), 64);
