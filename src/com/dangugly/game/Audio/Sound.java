@@ -23,7 +23,11 @@ public class Sound {
             sounds.put("intro", playSound);
             playSound = Applet.newAudioClip(getClass().getResource("/Music/intromenu.wav"));
             sounds.put("introm", playSound);
-            playSound = Applet.newAudioClip(getClass().getResource("/SFX/menuoption.wav"));
+            playSound = Applet.newAudioClip(getClass().getResource("/Music/game_win.wav"));
+            sounds.put("win", playSound);
+            playSound = Applet.newAudioClip(getClass().getResource("/Music/game_lose.wav"));
+            sounds.put("lose", playSound);
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/ally_saved.wav"));
             sounds.put("opt", playSound);
             playSound = Applet.newAudioClip(getClass().getResource("/Music/Background.wav"));
             sounds.put("background", playSound);
@@ -60,9 +64,11 @@ public class Sound {
     }
 
     public void loadMap(){
+        soundsMap.put("win","/Music/game_win.wav");
+        soundsMap.put("lose","/Music/game_lose.wav");
         soundsMap.put("intro", "/Music/intro.wav");
         soundsMap.put("introm", "/Music/intromenu.wav");
-        soundsMap.put("opt", "/SFX/menuoption.wav");
+        soundsMap.put("opt", "/SFX/ally_saved.wav");
         soundsMap.put("background", "/Music/Background.wav");
         soundsMap.put("playerhit","/SFX/attack_hit.wav");
         soundsMap.put("enemyhit","/SFX/attack_hit_enemy.wav");

@@ -131,7 +131,7 @@ public class Enemy extends Entity {
             if(hitBounds.collides(player.getBounds())){
                 Sound.playClip("playerhit");
                 player.setHits();
-                System.out.println("Hit taken !");
+                //System.out.println("Hit taken !");
             }
             if(!fallen){
                 if(!bounds.collisionTile(dx, 0)){

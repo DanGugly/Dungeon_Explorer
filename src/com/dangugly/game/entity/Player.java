@@ -156,7 +156,7 @@ public class Player extends Entity {
                 enemy[x].setHits();
                 if(enemy[x].getHits() > 50) kills+=1;
                 //enemy.addForce(force * getDirection(), currentAnimation == UP || currentAnimation == DOWN);
-                System.out.println("Enemy hit !");
+                //System.out.println("Enemy hit !");
             }
         }
 
@@ -203,7 +203,7 @@ public class Player extends Entity {
     public void input(MouseHandler mouse, KeyHandler key){
 
         if (mouse.getButton() == 1){
-            System.out.println("Player: "+pos.x+", "+pos.y);
+            //System.out.println("Player: "+pos.x+", "+pos.y);
         }
 
         if (!fallen){
