@@ -73,6 +73,12 @@ public abstract class Entity {
     public void setAcc(float f){ acc = f;}
     public void setDeacc(float f){ deacc = f;}
 
+    public int getDirection() {
+        if(currentAnimation == UP || currentAnimation == LEFT) {
+            return -1;
+        }
+        return 1;
+    }
     public AABB getBounds() {
         return bounds;
     }
@@ -171,5 +177,4 @@ public abstract class Entity {
     }
 
     public abstract void render(Graphics2D g);
-    public void input(KeyHandler key, MouseHandler mouse){}
 }

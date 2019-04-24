@@ -47,6 +47,14 @@ public class Enemy extends Entity {
         }
     }
 
+    public void addForce(float a, boolean vertical) {
+        if(!vertical) {
+            dx -= a;
+        } else {
+            dy -= a;
+        }
+    }
+
     public int getHits(){
         return this.hits;
     }
@@ -120,7 +128,7 @@ public class Enemy extends Entity {
             move(player);
             if(hitBounds.collides(player.getBounds())){
                 player.setHits();
-                System.out.println("Youve been hit !");
+                System.out.println("Hit taken !");
             }
             if(!fallen){
                 if(!bounds.collisionTile(dx, 0)){

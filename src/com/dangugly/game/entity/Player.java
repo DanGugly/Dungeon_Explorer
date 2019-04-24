@@ -3,7 +3,6 @@ package com.dangugly.game.entity;
 import com.dangugly.game.GamePanel;
 import com.dangugly.game.graphics.Sprite;
 import com.dangugly.game.states.PlayState;
-import com.dangugly.game.util.AABB;
 import com.dangugly.game.util.KeyHandler;
 import com.dangugly.game.util.MouseHandler;
 import com.dangugly.game.util.Vector2f;
@@ -14,6 +13,8 @@ public class Player extends Entity {
 
     private int hits = 0;
     private boolean alive = true;
+
+    protected float force = 25f;
 
     private int kills = 0;
 
@@ -126,14 +127,17 @@ public class Player extends Entity {
         dy = 0;
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
     }
-    public void update(Enemy enemy, double time){
+    public void update(Enemy[] enemy, double time){
         super.update();
 
         attacking = isAttacking(time);
-        if(attack && hitBounds.collides(enemy.getBounds())){
-            enemy.setHits();
-            if(enemy.getHits() > 50) kills+=1;
-            System.out.println("Ive been hit !");
+        for (int x =0; x<13;x++){
+            if(attack && hitBounds.collides(enemy[x].getBounds())){
+                enemy[x].setHits();
+                if(enemy[x].getHits() > 50) kills+=1;
+                //enemy.addForce(force * getDirection(), currentAnimation == UP || currentAnimation == DOWN);
+                System.out.println("Enemy hit !");
+            }
         }
 
         if(!fallen){
@@ -178,9 +182,9 @@ public class Player extends Entity {
 
     public void input(MouseHandler mouse, KeyHandler key){
 
-        //if (mouse.getButton() == 1){
-        //    System.out.println("Player: "+pos.x+", "+pos.y);
-       // }
+        if (mouse.getButton() == 1){
+            System.out.println("Player: "+pos.x+", "+pos.y);
+        }
 
         if (!fallen){
             if(key.up.down){
