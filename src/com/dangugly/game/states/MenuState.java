@@ -41,8 +41,8 @@ public class MenuState extends GameState {
 
         if (key.enter.down){
             bgMusic.stop();
-            gsm.add((GameStateManager.PLAY));
             gsm.pop(GameStateManager.MENU);
+            gsm.add((GameStateManager.PLAY));
         }
 
         if (key.escape.down){

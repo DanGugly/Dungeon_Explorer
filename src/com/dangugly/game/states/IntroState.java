@@ -43,8 +43,8 @@ public class IntroState extends GameState {
             if(alpha > 255) alpha = 255;
         }
         if(ticks > FADE_IN + LENGTH + FADE_OUT) {
-            gsm.add(GameStateManager.MENU);
             gsm.pop(GameStateManager.INTRO);
+            gsm.add(GameStateManager.MENU);
         }
     }
 
