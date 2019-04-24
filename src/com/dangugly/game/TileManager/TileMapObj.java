@@ -1,9 +1,6 @@
 package com.dangugly.game.TileManager;
 
-import com.dangugly.game.TileManager.blocks.Block;
-import com.dangugly.game.TileManager.blocks.HoleBlock;
-import com.dangugly.game.TileManager.blocks.NormBlock;
-import com.dangugly.game.TileManager.blocks.ObjBlock;
+import com.dangugly.game.TileManager.blocks.*;
 import com.dangugly.game.graphics.Sprite;
 import com.dangugly.game.util.AABB;
 import com.dangugly.game.util.Vector2f;
@@ -36,7 +33,11 @@ public class TileMapObj extends TileMap {
             if(temp!=0){
                 if (temp == 172){
                     tempBlock = new HoleBlock(sprite.getSprite((int) ((temp - 1) % tileColumns), (int) ((temp - 1) / tileColumns) ), new Vector2f((int) (i % width) * tilewidth, (int) (i / height) * tileHeight), tilewidth, tileHeight);
-                } else {
+                }
+                else if( temp == 254 ){
+                    tempBlock = new ChestBlock(sprite.getSprite((int) ((temp - 1) % tileColumns), (int) ((temp - 1) / tileColumns) ), new Vector2f((int) (i % width) * tilewidth, (int) (i / height) * tileHeight), tilewidth, tileHeight);
+                }
+                else {
                     tempBlock = new ObjBlock(sprite.getSprite((int) ((temp - 1) % tileColumns), (int) ((temp - 1) / tileColumns) ), new Vector2f((int) (i % width) * tilewidth, (int) (i / height) * tileHeight), tilewidth, tileHeight);
                 }
                 event_blocks[i] = tempBlock;
