@@ -34,8 +34,8 @@ public class PlayState extends GameState{
     private BufferedImage kill;
     private BufferedImage death;
 
-    private static final String ALLY = "entity/littlegirl.png";
-    private static final String ENEMY = "entity/wizardPlayer.png";
+    private static final String ALLY = "res/entity/littlegirl.png";
+    private static final String ENEMY = "res/entity/wizardPlayer.png";
 
     public static Vector2f map;
 
@@ -48,17 +48,17 @@ public class PlayState extends GameState{
         cam = new Camera(new AABB(new Vector2f(0, 0), GamePanel.width + 64 , GamePanel.height+64 ));
 
         try {
-            hp = ImageIO.read(getClass().getResourceAsStream("/hud/life_icon.png"));
-            save = ImageIO.read(getClass().getResourceAsStream("/hud/ally_saved_icon.png"));
-            kill = ImageIO.read(getClass().getResourceAsStream("/hud/kills_icon.png"));
-            death = ImageIO.read(getClass().getResourceAsStream("/hud/deaths_icon.png"));
+            hp = ImageIO.read(new File("res/hud/life_icon.png"));
+            save = ImageIO.read(new File("res/hud/ally_saved_icon.png"));
+            kill = ImageIO.read(new File("res/hud/kills_icon.png"));
+            death = ImageIO.read(new File("res/hud/deaths_icon.png"));
         }
         catch(Exception e) {
             e.printStackTrace();
         }
 
-        tm = new TileManager("tile/tilemap.xml", cam);
-        font = new Font("font/font.png", 10, 10);
+        tm = new TileManager("res/tile/tilemap.xml", cam);
+        font = new Font("res/font/font.png", 10, 10);
 
         /*
         File file = new File("file.txt");
@@ -130,7 +130,7 @@ public class PlayState extends GameState{
         enemy[11] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(2656, 801), 64);
         enemy[12] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(381, 2621), 64); */
 
-        player = new Player(new Sprite("entity/linkFormatted.png"), new Vector2f(0+(GamePanel.width /2) -64, 0+(GamePanel.height/2)-64),64);
+        player = new Player(new Sprite("res/entity/linkFormatted.png"), new Vector2f(0+(GamePanel.width /2) -64, 0+(GamePanel.height/2)-64),64);
         //player = new Player(new Sprite("entity/wizardPlayer.png", 64 ,64), new Vector2f(0+(GamePanel.width /2) -64, 0+(GamePanel.height/2)-64),64);
 
         cam.target(player);

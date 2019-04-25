@@ -5,6 +5,7 @@ import com.dangugly.game.util.Vector2f;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 
 public class Sprite {
@@ -63,7 +64,7 @@ public class Sprite {
     private BufferedImage loadSprite(String file){
         BufferedImage sprite = null;
         try {
-            sprite = ImageIO.read(getClass().getClassLoader().getResourceAsStream(file));
+            sprite = ImageIO.read(new File(file));
         }catch (Exception e){
             System.out.println("ERROR: Couldn't load file...");
         }

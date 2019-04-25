@@ -40,7 +40,7 @@ public class GameStateManager {
 
         SoundManager = new Sound();
 
-        font = new Font("font/font.png", 10, 10);
+        font = new Font("res/font/font.png", 10, 10);
         Sprite.currentFont = font;
 
         states[INTRO] = new IntroState(this);

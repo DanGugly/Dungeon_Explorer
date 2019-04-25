@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class MenuState extends GameState {
 
@@ -21,7 +22,7 @@ public class MenuState extends GameState {
         super(gsm);
 
         try {
-            menu = ImageIO.read(getClass().getResourceAsStream("/Logo/menu.png"));
+            menu = ImageIO.read(new File("res/Logo/menu.png"));
         }
         catch(Exception e) {
             e.printStackTrace();

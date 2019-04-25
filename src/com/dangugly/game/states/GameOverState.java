@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class GameOverState extends GameState {
 
@@ -87,8 +88,8 @@ public class GameOverState extends GameState {
     public void init() {
         ticks = 0;
         try {
-                logo = ImageIO.read(getClass().getResourceAsStream("/Logo/logo.gif"));
-                score = ImageIO.read(getClass().getResourceAsStream("/Logo/end_score.png"));
+            logo = ImageIO.read(new File("res/Logo/logo.gif"));
+            score = ImageIO.read(new File("res/Logo/end_score.png"));
         }
         catch(Exception e) {
             e.printStackTrace();
