@@ -13,7 +13,7 @@ public class Camera {
 
     private boolean up, down, left, right;
 
-    private float dx, dy, maxSpeed = 4f, acc = 1f, deacc = 0.3f;
+    private float dx, dy, maxSpeed = 4.2f, acc = 1f, deacc = 0.3f;
 
     private int widthLimit, heightLimit;
 

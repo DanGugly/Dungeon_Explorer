@@ -191,10 +191,10 @@ public class PlayState extends GameState{
         /*Sprite.drawArray(g, font, "PRESS ENTER TO START", new Vector2f(GamePanel.width /2 - 260,150 ), 38, 24);
         Sprite.drawArray(g, font, "PRESS ESCAPE TO QUIT", new Vector2f(GamePanel.width /2 - 260,200 ), 38, 24);
         Sprite.drawArray(g, font, "CONTROLS:", new Vector2f(GamePanel.width /2 - 260,350 ), 38, 24);
-        Sprite.drawArray(g, font, "W A S D TO MOVE AND", new Vector2f(GamePanel.width /2 - 200,400 ), 38, 24);
+        Sprite.drawArray(g, font, "W A S D TO MOVE, SHIFT TO RUN AND", new Vector2f(GamePanel.width /2 - 200,400 ), 38, 24);
         Sprite.drawArray(g, font, "SPACE TO ATTACK, ESC TO PAUSE", new Vector2f(GamePanel.width /2 - 200,450 ), 38, 24);
         Sprite.drawArray(g, font, "OBJECTIVE:", new Vector2f(GamePanel.width /2 - 260,500 ), 38, 24);
-        Sprite.drawArray(g, font, "DEFEAT ENEMIES & SAVE ALLIES", new Vector2f(GamePanel.width /2 - 200,550 ), 38, 24); */
+        Sprite.drawArray(g, font, "DEFEAT ENEMIES & SAVE ALLIES", new Vector2f(GamePanel.width /2 - 200,550 ), 38, 24);*/
         Sprite.drawArray(g, font, GamePanel.oldFrameCount+" FPS", new Vector2f(GamePanel.width - 152,10), 24, 24);
         g.drawImage(hp, 200, 9, 24 , 24, null);
         Sprite.drawArray(g, font, "Life:"+(250-player.getHits()), new Vector2f(10,10), 24, 24);

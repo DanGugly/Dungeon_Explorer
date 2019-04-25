@@ -8,6 +8,7 @@ import com.dangugly.game.util.KeyHandler;
 import com.dangugly.game.util.MouseHandler;
 import com.dangugly.game.util.Vector2f;
 
+import java.applet.AudioClip;
 import java.awt.*;
 import java.util.Random;
 
@@ -22,6 +23,8 @@ public class Player extends Entity {
     private int deaths =0;
     private int saved = 0;
 
+    //AudioClip run = null;
+
     public Player(Sprite sprite, Vector2f origin, int size) {
         super(sprite, origin, size);
         acc = 2f;
@@ -31,6 +34,8 @@ public class Player extends Entity {
         bounds.setxOffset(12);
         bounds.setyOffset(40);
         bounds.setE(this);
+
+        //run = Sound.getClip("run");
 
         hitBounds.setWidth(48);
         hitBounds.setHeight(48);
@@ -250,6 +255,14 @@ public class Player extends Entity {
                 if(!attacking) {
                     attack = false;
                 }
+            }
+            if(key.shift.down){
+                maxSpeed = 3.8f;
+                //run.play();
+
+            } else {
+                maxSpeed = 3;
+                //run.stop();
             }
             if(up && down){
                 up = down = false;

@@ -49,6 +49,8 @@ public class Sound {
             sounds.put("playershout4", playSound);
             playSound = Applet.newAudioClip(getClass().getResource("/SFX/player_death.wav"));
             sounds.put("playerdeath", playSound);
+            playSound = Applet.newAudioClip(getClass().getResource("/SFX/running.wav"));
+            sounds.put("run", playSound);
         }catch (Exception e){ System.out.println("Failed loading sounds");}
     }
 
@@ -75,10 +77,11 @@ public class Sound {
         soundsMap.put("enemyattack","/SFX/enemy_attack.wav");
         soundsMap.put("playersword","/SFX/player_attack.wav");
         soundsMap.put("playershout1","/SFX/player_attack_add.wav");
-        soundsMap.put("playershout2","/SFX/player_attack_add_2");
-        soundsMap.put("playershout3","/SFX/player_attack_add_3");
-        soundsMap.put("playershout4","/SFX/player_attack_add_4");
-        soundsMap.put("playerdeath","/SFX/player_death");
+        soundsMap.put("playershout2","/SFX/player_attack_add_2.wav");
+        soundsMap.put("playershout3","/SFX/player_attack_add_3.wav");
+        soundsMap.put("playershout4","/SFX/player_attack_add_4.wav");
+        soundsMap.put("playerdeath","/SFX/player_death.wav");
+        soundsMap.put("run","/SFX/running.wav");
     }
 
     public static void playClip(String name){
