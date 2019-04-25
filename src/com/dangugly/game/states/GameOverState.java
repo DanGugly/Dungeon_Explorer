@@ -78,7 +78,7 @@ public class GameOverState extends GameState {
         }
         Sprite.drawArray(g, gsm.font, "FINAL SCORE", new Vector2f(480,215), 42, 24);
         Sprite.drawArray(g, gsm.font, ""+gsm.life, new Vector2f(750,275), 48, 24);
-        Sprite.drawArray(g, gsm.font, "  "+gsm.kills , new Vector2f(750,315), 48, 24);
+        Sprite.drawArray(g, gsm.font, " "+gsm.kills , new Vector2f(750,315), 48, 24);
         Sprite.drawArray(g, gsm.font,"  "+gsm.saved , new Vector2f(750,355), 48, 24);
         Sprite.drawArray(g, gsm.font,"  "+gsm.deaths , new Vector2f(750,395), 48, 24);
         Sprite.drawArray(g, gsm.font,"PRESS ENTER FOR MENU AND ESC TO EXIT" , new Vector2f(230,480), 36, 24);
