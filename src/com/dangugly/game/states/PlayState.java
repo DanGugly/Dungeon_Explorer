@@ -14,6 +14,9 @@ import javax.imageio.ImageIO;
 import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class PlayState extends GameState{
 
@@ -73,14 +76,47 @@ public class PlayState extends GameState{
 
         ally = new Ally[4];
         enemy = new Enemy[13];
-        //Change size of enemy 48 / 48 w / h
+
+        int x =0, y = 0;
+
+        File file = new File("res/tile/allyspawns.txt");
+        try {
+            Scanner scanner = new Scanner(file);
+            for (int i = 0; i < 4; i++){
+                if(scanner.hasNext()){
+                    x = scanner.nextInt();
+                    if(scanner.hasNextInt()){
+                        y  = scanner.nextInt();
+                    }
+                }
+                ally[i] = new Ally(cam, new Sprite(ALLY, 48, 48), new Vector2f(x, y),48);
+            }
+
+            file = new File("res/tile/enemyspawns.txt");
+            scanner = new Scanner(file);
+            for (int i = 0; i < 13; i++){
+                if(scanner.hasNext()){
+                    x = scanner.nextInt();
+                    if(scanner.hasNextInt()){
+                        y  = scanner.nextInt();
+                    }
+                }
+                enemy[i] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(x, y), 64);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        /*//Change size of enemy 48 / 48 w / h
         ally[0] = new Ally(cam, new Sprite(ALLY, 48, 48), new Vector2f(1632, 216),48);
         ally[1] = new Ally(cam, new Sprite(ALLY, 48, 48), new Vector2f(2781, 2378),48);
         ally[2] = new Ally(cam, new Sprite(ALLY, 48, 48), new Vector2f(270, 2793),48);
         ally[3] = new Ally(cam, new Sprite(ALLY, 48, 48), new Vector2f(0 + (GamePanel.width / 2) +400, 0 + (GamePanel.height / 2) -50),48);
+        */
 
         //enemy[1] = new Enemy(cam, new Sprite("entity/wizardPlayer.png", 64, 64), new Vector2f(0 + (GamePanel.width / 2) +400, 0 + (GamePanel.height / 2) -100), 64);
-        enemy[0] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(1606, 390), 64);
+        /*enemy[0] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(1606, 390), 64);
         enemy[1] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(1688, 384), 64);
         enemy[2] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(1635, 1162), 64);
         enemy[3] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(1443, 1706), 64);
@@ -92,7 +128,7 @@ public class PlayState extends GameState{
         enemy[9] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(2781, 2198), 64);
         enemy[10] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(2377, 801), 64);
         enemy[11] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(2656, 801), 64);
-        enemy[12] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(381, 2621), 64);
+        enemy[12] = new Enemy(cam, new Sprite(ENEMY, 64, 64), new Vector2f(381, 2621), 64); */
 
         player = new Player(new Sprite("entity/linkFormatted.png"), new Vector2f(0+(GamePanel.width /2) -64, 0+(GamePanel.height/2)-64),64);
         //player = new Player(new Sprite("entity/wizardPlayer.png", 64 ,64), new Vector2f(0+(GamePanel.width /2) -64, 0+(GamePanel.height/2)-64),64);
