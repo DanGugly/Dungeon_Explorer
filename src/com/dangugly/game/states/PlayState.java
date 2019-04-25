@@ -112,12 +112,14 @@ public class PlayState extends GameState{
             }
             cam.update();
             if(player.getDeaths() < 3 && player.getSaved() > 3 ){   //Win  condition
+                gsm.setScore(player.getKills(),250-player.getHits(), player.getSaved(),player.getDeaths());
                 bgMusic.stop();
                 gsm.add(GameStateManager.GAMEOVER, true);
                 gsm.pop(GameStateManager.PLAY);
             } else if (player.getDeaths() >= 3){         //Lose condition
+                gsm.setScore(player.getKills(),250-player.getHits(), player.getSaved(),player.getDeaths());
                 bgMusic.stop();
-                gsm.add(GameStateManager.GAMEOVER);
+                gsm.add(GameStateManager.GAMEOVER, false);
                 gsm.pop(GameStateManager.PLAY);
             }
         }

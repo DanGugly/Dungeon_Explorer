@@ -17,26 +17,24 @@ public class GameOverState extends GameState {
     AudioClip end = null;
 
     private BufferedImage logo;
+    private BufferedImage score;
 
     private int alpha;
     private int ticks;
 
     private final int FADE_IN = 240;
 
-    public GameOverState(GameStateManager gsm) {
-        super(gsm);
-
-        end = Sound.getClip("lose");
-        end.play();
-        init();
-    }
-
     public GameOverState(GameStateManager gsm, boolean win) {
         super(gsm);
 
-        end = Sound.getClip("win");
+        if(win){
+            end = Sound.getClip("win");
+        }else {
+            end = Sound.getClip("lose");
+        }
+
         end.play();
-        init(win);
+        init();
     }
 
     @Override
@@ -64,31 +62,28 @@ public class GameOverState extends GameState {
 
     @Override
     public void render(Graphics2D g) {
-        Sprite.drawArray(g, gsm.font, GamePanel.oldFrameCount+" FPS", new Vector2f(GamePanel.width - 152,10), 24, 24);
+
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, GamePanel.WIDTH +1280, GamePanel.height);
         g.drawImage(logo, 0, 0, GamePanel.WIDTH +1280 , GamePanel.height, null);
-        g.setColor(new Color(0, 0, 0, alpha));
-        g.fillRect(0, 0, GamePanel.WIDTH+1280, GamePanel.height);
-    }
+        g.drawImage(score, GamePanel.WIDTH +340, GamePanel.height -450, GamePanel.WIDTH +580 , GamePanel.height -550, null);
 
-    public void init(boolean win) {
-        ticks = 0;
-        try {
-            logo = ImageIO.read(getClass().getResourceAsStream("/Logo/logo.gif"));
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
+        //Sprite.drawArray(g, gsm.font, "     "+gsm.life, new Vector2f(480,10), 48, 24);
+        Sprite.drawArray(g, gsm.font, ""+gsm.life, new Vector2f(750,275), 48, 24);
+        Sprite.drawArray(g, gsm.font, "  "+gsm.kills , new Vector2f(750,315), 48, 24);
+        Sprite.drawArray(g, gsm.font,"  "+gsm.saved , new Vector2f(750,355), 48, 24);
+        Sprite.drawArray(g, gsm.font,"  "+gsm.deaths , new Vector2f(750,395), 48, 24);
     }
 
     public void init() {
         ticks = 0;
         try {
-            logo = ImageIO.read(getClass().getResourceAsStream("/Logo/logo.gif"));
+                logo = ImageIO.read(getClass().getResourceAsStream("/Logo/logo.gif"));
+                score = ImageIO.read(getClass().getResourceAsStream("/Logo/end_score.png"));
         }
         catch(Exception e) {
             e.printStackTrace();
         }
     }
+
 }

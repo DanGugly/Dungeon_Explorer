@@ -20,6 +20,11 @@ public class GameStateManager {
     public static final int GAMEOVER = 3;
     public static final int INTRO = 4;
 
+    public static int life = 0;
+    public static int kills = 0;
+    public static int saved = 0;
+    public static int deaths = 0;
+
     public static Vector2f map;
 
     public int onTopState = 0;
@@ -65,10 +70,15 @@ public class GameStateManager {
         if(state == INTRO){
             states[INTRO] = new IntroState(this);
         }
-        if(state == GAMEOVER){
-            states[GAMEOVER] = new GameOverState(this);
-        }
     }
+
+    public void setScore(int k, int l, int s, int d){
+        this.kills = k;
+        this.life = l;
+        this.saved = s;
+        this.deaths = d;
+    }
+
     public void add(int state, boolean end){
         if(state == GAMEOVER){
             states[GAMEOVER] = new GameOverState(this, end);
