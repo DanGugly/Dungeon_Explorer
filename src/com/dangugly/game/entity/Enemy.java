@@ -145,6 +145,7 @@ public class Enemy extends Entity {
             } else {
                 fallen = true;
                 attack = false;
+                player.setKills();
                 animate();
                 destroy();
             }

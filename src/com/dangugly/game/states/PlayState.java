@@ -79,7 +79,7 @@ public class PlayState extends GameState{
 
         int x =0, y = 0;
 
-        File file = new File("res/tile/allyspawns.txt");
+        File file = new File ("res/tile/allyspawns.txt");
         try {
             Scanner scanner = new Scanner(file);
             for (int i = 0; i < 4; i++){
