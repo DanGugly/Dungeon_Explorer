@@ -121,6 +121,7 @@ public class Enemy extends Entity {
 
     private void destroy(){
         alive = false;
+        Sound.playClip("enemyhit");
     }
 
     public void update(Player player){
