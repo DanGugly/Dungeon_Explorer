@@ -166,6 +166,7 @@ public class PlayState extends GameState{
         if(key.enter.clicked&&(gsm.getState(GameStateManager.PAUSE))){
             gsm.pop(GameStateManager.PAUSE);
             gsm.pop(GameStateManager.PLAY);
+            key.enter.toggle(false);
             gsm.add(GameStateManager.MENU);
         }
 

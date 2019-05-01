@@ -8,6 +8,7 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(new GamePanel(1280,720));
         setIgnoreRepaint(true);
+        setResizable(false);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);

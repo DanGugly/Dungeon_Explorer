@@ -51,11 +51,11 @@ public class IntroState extends GameState {
 
     @Override
     public void input(MouseHandler mouse, KeyHandler key) {
-        key.enter.tick();         //Skip intro by pressing enter, messes with menu and insta starts
-        if (key.enter.clicked){
+        if (key.enter.down){
             bgMusic.stop();
-            gsm.add(GameStateManager.MENU);
             gsm.pop(GameStateManager.INTRO);
+            key.enter.toggle(false);
+            gsm.add(GameStateManager.MENU);
         }
     }
 

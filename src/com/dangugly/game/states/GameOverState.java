@@ -55,6 +55,7 @@ public class GameOverState extends GameState {
         if (key.enter.down){
             end.stop();
             gsm.pop(GameStateManager.GAMEOVER);
+            key.enter.toggle(false);
             gsm.add((GameStateManager.MENU));
         }
 
